@@ -1,0 +1,178 @@
+.main-ctn {
+  width: 370px;
+  height: 300px;
+  padding: 0;
+  text-align: center;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.cart-label {
+  color: rgba(92, 177, 231, 1);
+  font-family: Rubik;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.scrollable-container {
+  height: 206px;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: rgba(92, 177, 231, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.item-image {
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+.item-details {
+  flex-grow: 1;
+}
+
+.item-details h3,
+.item-details p {
+  margin: 2px 0;
+}
+
+.remove-button {
+  margin-right: 20px;
+  background-color: rgba(214, 78, 78, 1);
+  color: white;
+  border: none;
+  font-family: Rubik;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0em;
+  border-radius: 5px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.remove-button:hover {
+  background-color: rgba(214, 78, 78, 0.8);
+}
+
+.food-name {
+  font-family: Rubik;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0em;
+}
+
+.price {
+  color: rgba(92, 177, 231, 1);
+  font-family: Rubik;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0em;
+}
+
+.line {
+  width: calc(100% - 24px);
+  height: 1px;
+  background-color: rgba(92, 177, 231, 1);
+}
+
+.second-ctn {
+  margin-top: -5px;
+  background-color: rgba(92, 177, 231, 0.31);
+  height: 100px;
+  padding: 1px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  align-items: center;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+.total-price {
+  margin-top: 9px;
+  font-family: Rubik;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: rgba(92, 177, 231, 1);
+}
+
+.selection-label {
+  font-family: Rubik;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.ins-ctn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  margin-top: 20px; 
+}
+
+.ins-label {
+  font-family: Rubik;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0em;
+  margin-bottom: 5px; 
+}
+
+.ins-input {
+  width: 273px;
+  height: 69px;
+  border: none;
+  border-radius: 18px;
+  padding: 15px; 
+  box-sizing: border-box; 
+}
+
+.place-order {
+  width: 297px;
+  height: 43.74px;
+  background: rgba(65, 181, 62, 1);
+  border: none;
+  border-radius: 7px;
+  font-family: Rubik;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: white;
+  margin: 35px;
+}

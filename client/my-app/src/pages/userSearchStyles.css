@@ -1,0 +1,144 @@
+.main-ctn {
+  background-color: rgba(92, 177, 231, 0.31);
+  border-radius: 18px;
+  padding-top: 43px;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: auto;
+}
+button {
+  cursor: pointer;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Increase shadow */
+}
+.food-stuff {
+  font-family: Rubik;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: rgba(92, 177, 231, 1);
+}
+
+.food-name {
+  margin-top: 4px;
+}
+
+.description-label {
+  font-family: Rubik;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0em;
+  margin-left: 10px;
+  /* text-align: center; */ /* looks better centered ngl */
+}
+.description-box {
+  width: auto;
+  height: 117px;
+  background-color: white;
+  border-radius: 18px;
+}
+
+.price-qty {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.qty-label,
+.price-label {
+  font-family: Rubik;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0em;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 83px;
+  height: 13px;
+  /* height: 15px; Total height */
+  padding: 5px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.counter button {
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.counter .count {
+  font-family: Rubik;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.increment,
+.decrement {
+  font-family: Rubik;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.price-value {
+  color: rgba(92, 177, 231, 1);
+  font-family: Rubik;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+.btn-ctn {
+  display: flex;
+  justify-content: center;
+}
+.add-to-cart {
+  width: auto;
+  height: 43.74px;
+  background-color: rgba(92, 177, 231, 1);
+  border: none;
+  border-radius: 7px;
+  color: white;
+  font-family: Rubik;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.view-cart {
+  margin-top: 25px;
+  background-color: rgba(92, 177, 231, 1);
+  color: white;
+  border: none;
+  font-family: Rubik;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  width: 282px;
+  height: 40px;
+  border-radius: 7px;
+}
