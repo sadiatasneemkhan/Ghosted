@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=1
+
+  db: 
+    environment:
+      - MYSQL_DATABASE=dev_db

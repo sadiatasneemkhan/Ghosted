@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  web:
+    image: ghosted-web-app 
+    ports:
+      - "80:80" #app on port 80
+    depends_on:
+      - db # make sure db is started first
+    working_dir: 
+      /client
+    # environment:
+    #   - DATABASE_URL=mysql://dbuser:dbpassword@db/mydatabase #db url
+
+  db:
+    image: mysql
+    volumes:
+      - db-data:/var/lib/mysql #mounts volume for changes
+  #   # working_dir: 
+    #   /server
+    #   MYSQL_ROOT_PASSWORD: tbd
+    #   MYSQL_DATABASE: seng513
+    #   MYSQL_USER: dbuser
+    #   MYSQL_PASSWORD: dbpassword
+    # ports:
+    #   - "3306:3306" # MYSQL port 3306 on host (for dev purposes only)
+
+volumes:
+  db-data:
+    
