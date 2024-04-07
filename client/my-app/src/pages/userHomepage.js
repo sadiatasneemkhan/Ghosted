@@ -14,8 +14,11 @@ function UserHomepage() {
     navigate('/userHomepage');
   };
 
+  const chatNavigate = () => {
+    navigate('/userChat');
+  };
   const settingNavigate = () => {
-    navigate('/signupPersonal');
+    navigate('/userProfile');
   }
 
   const foodClickNavigate = () => {
@@ -23,11 +26,11 @@ function UserHomepage() {
   }
   return (
     <div className="HomepageMainCon">
-      <img src={'/logo.svg'} className="App-logo-small" alt="logo" />
+      <img src={'/logo.svg'} className="App-logo-small" alt="logo"  />
       <h1 className="Home-title">Home</h1>
       <div className="UserContainer">
         <div className="UserDetails">
-          <img src={'/Pfp.svg'} className="Pfp" alt="User profile picture" />
+          <img src={'/Pfp.svg'} className="Pfp" alt="User profile picture"  onClick={settingNavigate} style={{ cursor: 'pointer' }} draggable="false"/>
           <h4 className="DisplayUserName">Welcome *UserName*</h4>
         </div>
       </div>
@@ -72,8 +75,8 @@ function UserHomepage() {
       </div>
       <footer className="bottom_nav">
         <img src={'/HomeIconB.svg'} onClick={homeNavigate} className="home_icon" alt="home icon" style={{ cursor: 'pointer' }} />
-        <img src={'/ChatIconG.svg'} className="chat_icon" alt="chat icon" style={{ cursor: 'pointer' }} />
-        <img src={'/SettingIconG.svg'} className="setiing_icon" alt="setting icon" style={{ cursor: 'pointer' }} />
+        <img src={'/ChatIconG.svg'} onClick={chatNavigate} className="chat_icon" alt="chat icon" style={{ cursor: 'pointer' }} />
+        <img src={'/SettingIconG.svg'} onClick={settingNavigate} className="setiing_icon" alt="setting icon" style={{ cursor: 'pointer' }} />
       </footer>
     </div>
   );

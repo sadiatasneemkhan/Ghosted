@@ -2,13 +2,32 @@ import React, { useEffect, useRef, useState } from 'react';
 import './userChat.css';
 import './pages.css';
 import NavBar from '../components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 function UserNewChat() {
     const textareaRef = useRef(null);
     const chatAreaRef = useRef(null);
-    const typeMessageRef = useRef(null); 
+    const typeMessageRef = useRef(null);
     const [initialChatAreaHeight, setInitialChatAreaHeight] = useState(0);
 
+
+    const navigate = useNavigate();
+
+    const homeNavigate = () => {
+        navigate('/userHomepage');
+      };
+    
+      const chatNavigate = () => {
+        navigate('/userChat');
+      };
+      const settingNavigate = () => {
+        navigate('/userProfile');
+      }
+
+      const chatlistNavigate = () => {
+        navigate('/userChat');
+      }
+      
     useEffect(() => {
         const setInitialSizes = () => {
             if (chatAreaRef.current) {
@@ -35,11 +54,11 @@ function UserNewChat() {
 
             if (currentTextareaHeight > textarea.offsetHeight) {
                 textarea.style.height = `${currentTextareaHeight}px`;
-                typeMessage.style.height = `auto`; 
+                typeMessage.style.height = `auto`;
                 newChatAreaHeight = Math.max(0, initialChatAreaHeight - (currentTextareaHeight - 40));
             } else {
                 textarea.style.height = `40px`;
-                typeMessage.style.height = `auto`; 
+                typeMessage.style.height = `auto`;
             }
 
             if (chatAreaRef.current) {
@@ -51,11 +70,11 @@ function UserNewChat() {
 
         const textarea = textareaRef.current;
         textarea.addEventListener('input', adjustTextareaAndChatArea);
-        textarea.addEventListener('paste', adjustTextareaAndChatArea); 
+        textarea.addEventListener('paste', adjustTextareaAndChatArea);
 
         return () => {
             textarea.removeEventListener('input', adjustTextareaAndChatArea);
-            textarea.removeEventListener('paste', adjustTextareaAndChatArea); 
+            textarea.removeEventListener('paste', adjustTextareaAndChatArea);
         };
     }, [initialChatAreaHeight]);
 
@@ -64,7 +83,7 @@ function UserNewChat() {
             <header className="new_msg_header">
                 <div className="back_button">
                     <button>
-                        <img src={"/arrow.svg"} className="arrow" alt="back button" />
+                        <img src={"/arrow.svg"} className="arrow" alt="back button" onClick={chatlistNavigate}/>
                     </button>
                 </div>
                 <div className="business_name">
@@ -81,12 +100,16 @@ function UserNewChat() {
                 <div ref={typeMessageRef} className="type_message">
                     <textarea ref={textareaRef} className="type_message_input" placeholder="Type Message" maxLength="200"></textarea>
                     <button className="send_message">
-                    <img src={'/Send.svg'} alt="Send message" />
+                        <img src={'/Send.svg'} alt="Send message" />
                     </button>
                 </div>
             </div>
 
-            <NavBar />
+            <footer className="bottom_nav">
+                <img src={'/HomeIconG.svg'} onClick={homeNavigate} className="home_icon" alt="home icon" style={{ cursor: 'pointer' }} />
+                <img src={'/ChatIconB.svg'} onClick={chatNavigate} className="chat_icon" alt="chat icon" style={{ cursor: 'pointer' }} />
+                <img src={'/SettingIconG.svg'} onClick={settingNavigate} className="setiing_icon" alt="setting icon" style={{ cursor: 'pointer' }} />
+            </footer>
         </div>
     );
 }

@@ -11,10 +11,21 @@ function UserFoodClick() {
   const userFoodItems = () => {
     navigate('/userSearch');
   };
-  
+
   const userCartItems = () => {
     navigate('/userCart');
   };
+
+  const homeNavigate = () => {
+    navigate('/userHomepage');
+  };
+  const chatNavigate = () => {
+    navigate('/userChat');
+  };
+  const settingNavigate = () => {
+    navigate('/userProfile');
+  }
+
   return (
     <>
       <div className="HomepageMainCon">
@@ -27,23 +38,27 @@ function UserFoodClick() {
         <p className="address">Address</p>
       </div>
       <div className="scrollable-containerr">
-        <div className="food-items" onClick={userFoodItems}>
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
+        <div className="food-items">
+          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={userFoodItems} style={{ cursor: 'pointer' }} draggable="false" />
+          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={userFoodItems} style={{ cursor: 'pointer' }} draggable="false" />
+          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={userFoodItems} style={{ cursor: 'pointer' }} draggable="false" />
+          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={userFoodItems} style={{ cursor: 'pointer' }} draggable="false" />
+          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={userFoodItems} style={{ cursor: 'pointer' }} draggable="false" />
+          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={userFoodItems} style={{ cursor: 'pointer' }} draggable="false" />
+          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={userFoodItems} style={{ cursor: 'pointer' }} draggable="false" />
+          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={userFoodItems} style={{ cursor: 'pointer' }} draggable="false" />
+          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={userFoodItems} style={{ cursor: 'pointer' }} draggable="false" />
+          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={userFoodItems} style={{ cursor: 'pointer' }} draggable="false" />
+          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={userFoodItems} style={{ cursor: 'pointer' }} draggable="false" />
+          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={userFoodItems} style={{ cursor: 'pointer' }} draggable="false" />
         </div>
         <button className="view-cart-btn" onClick={userCartItems}>View cart</button>
 
-        <Navbar />
+        <footer className="bottom_nav">
+          <img src={'/HomeIconB.svg'} onClick={homeNavigate} className="home_icon" alt="home icon" style={{ cursor: 'pointer' }} />
+          <img src={'/ChatIconG.svg'} onClick={chatNavigate} className="chat_icon" alt="chat icon" style={{ cursor: 'pointer' }} />
+          <img src={'/SettingIconG.svg'} onClick={settingNavigate} className="setiing_icon" alt="setting icon" style={{ cursor: 'pointer' }} />
+        </footer>
       </div>
     </>
   );

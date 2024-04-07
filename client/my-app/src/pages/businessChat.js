@@ -7,12 +7,27 @@
 // import settingIcon from '../settingIcon.svg';
 import './pages.css';
 import Navbar from '../components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 function BusinessChat() {
   <style>
     @import
     url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap')
   </style>;
+
+  const navigate = useNavigate();
+  
+  const homeNavigate = () => {
+    navigate('/businessHomepage');
+  };
+
+  const chatNavigate = () => {
+    navigate('/businessChat');
+  };
+  const settingNavigate = () => {
+    navigate('/businessProfile');
+  }
+
 
   return (
     <div>
@@ -107,7 +122,11 @@ function BusinessChat() {
         </div>
       </section>
 
-      <Navbar />
+      <footer className="bottom_nav">
+        <img src={'/HomeIconG.svg'} onClick={homeNavigate} className="home_icon" alt="home icon" style={{ cursor: 'pointer' }} />
+        <img src={'/ChatIconB.svg'} onClick={chatNavigate} className="chat_icon" alt="chat icon" style={{ cursor: 'pointer' }} />
+        <img src={'/SettingIconG.svg'} onClick={settingNavigate} className="setiing_icon" alt="setting icon" style={{ cursor: 'pointer' }} />
+      </footer>
     </div>
   );
 }

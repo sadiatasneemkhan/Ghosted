@@ -13,8 +13,19 @@ function Homepage() {
   const userCartItems = () => {
     navigate('/userCart');
   };
-  
+
   const [count, setCount] = useState(0);
+
+  const homeNavigate = () => {
+    navigate('/userHomepage');
+  };
+  const chatNavigate = () => {
+    navigate('/userChat');
+  };
+  const settingNavigate = () => {
+    navigate('/userProfile');
+  }
+
 
   const increment = () => {
     setCount(count + 1);
@@ -67,7 +78,11 @@ function Homepage() {
       <div className="view-cart-btn-ctn" onClick={userCartItems}>
         <button className="view-cart">View cart</button>
       </div>
-      <Navbar />
+      <footer className="bottom_nav">
+        <img src={'/HomeIconB.svg'} onClick={homeNavigate} className="home_icon" alt="home icon" style={{ cursor: 'pointer' }} />
+        <img src={'/ChatIconG.svg'} onClick={chatNavigate} className="chat_icon" alt="chat icon" style={{ cursor: 'pointer' }} />
+        <img src={'/SettingIconG.svg'} onClick={settingNavigate} className="setiing_icon" alt="setting icon" style={{ cursor: 'pointer' }} />
+      </footer>
     </div>
   );
 }
