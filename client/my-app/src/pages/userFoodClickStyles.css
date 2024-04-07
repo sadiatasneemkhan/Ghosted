@@ -29,10 +29,19 @@
 .scrollable-containerr {
   overflow-y: auto;
   width: 100%;
-  max-height: 470px; /* Adjust the maximum height as needed */
+  max-height: 470px; 
   display: flex;
   flex-direction: column;
 }
+
+.scrollable-containerr2 {
+  overflow-y: auto;
+  width: 100%;
+  max-height: 470px; 
+  display: flex;
+  flex-direction: column;
+}
+
 
 .food-items {
   display: flex;

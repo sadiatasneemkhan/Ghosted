@@ -552,17 +552,39 @@
     margin-bottom: 10px;
 }
 
-.user_profile_buttons2{
+.business_buttons1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px 20px 10px 20px;
+}
+
+.business_buttons1 button{
+    width: 349px;
+    height: 62px;
+    border-radius: 19px;
+    margin: 0px -10px;
+    border: 3px solid #FFFFFF;
+    font-family: "Rubik", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #FFFFFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 10px;
+}
+
+
+.business_edit_button2{
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.user_profile_buttons2 button{
+.business_edit_button2 button{
     width: 169.5px;
     height: 50px;
     border-radius: 19px;
-    margin: 0px 5px 110px 5px;
+    margin: 0px 5px 0px 5px;
     border: 3px solid #FFFFFF;
     font-family: "Rubik", sans-serif;
     font-weight: 400;

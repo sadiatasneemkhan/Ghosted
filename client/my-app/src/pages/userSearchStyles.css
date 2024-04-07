@@ -20,6 +20,15 @@ button {
   color: rgba(92, 177, 231, 1);
 }
 
+.food-stuff2 {
+  font-family: Rubik;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
 .food-name {
   margin-top: 4px;
 }
@@ -142,3 +151,4 @@ button {
   height: 40px;
   border-radius: 7px;
 }
+

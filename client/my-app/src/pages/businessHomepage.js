@@ -39,7 +39,7 @@ function BusinessHomePage() {
                 </div>
             </div>
 
-            <div className="scrollable-containerr">
+            <div className="scrollable-containerr2">
                 <div className="food-items">
                     <img className="food-items1" src="food.png" alt="Food Item 1" onClick={editNavigate} style={{ cursor: 'pointer' }} draggable="false" />
                     <img className="food-items1" src="food.png" alt="Food Item 1" onClick={editNavigate} style={{ cursor: 'pointer' }} draggable="false" />

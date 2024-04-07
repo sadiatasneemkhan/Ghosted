@@ -84,6 +84,28 @@
     margin-right: 10px; 
 }
 
+.description-item{
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+    border: none;
+    cursor:default;
+    outline-width: 0; 
+    width: 260px;
+    height: 40px;
+    outline-width: 0;
+    font-size: 15px;
+    color: #646464;
+    resize:vertical; 
+    max-width: 300px; 
+    overflow:scroll;
+    max-height: 125px;
+    min-height: 30px;
+    flex-grow: 1; 
+    margin: auto;
+}
+
+
 
 .send_message {
     background: transparent; 
