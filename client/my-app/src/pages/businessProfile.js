@@ -25,6 +25,9 @@ function BusinessProfile() {
     navigate('/businessProfile');
   }
 
+  const logoutNavigate = () => {
+    navigate('/signin');
+  }
   return (
     <div>
       <header className="msg_header">
@@ -91,11 +94,11 @@ function BusinessProfile() {
               </button>
             </div>
 
-            <div className="user_profile_buttons2">
+            <div className="business_edit_button2">
               <button className="save_changes2" type="submit">
                 Save Changes
               </button>
-              <button className="log_out2" type="button">
+              <button className="log_out2" type="button" onClick={logoutNavigate}>
                 Log Out
               </button>
             </div>
