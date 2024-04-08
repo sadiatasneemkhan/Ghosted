@@ -148,6 +148,19 @@
     margin-top: 3px;
 }
 
+.businessname input[type="password"] {
+    width: 349px;
+    height: 45px;
+    top: 271px;
+    left: 36px;
+    border-radius: 19px;
+    border: 3px;
+    margin-top: 7px;
+    background: #FDFDFD;
+    border: 3px solid #4195CC;
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
 .page2_inputfields {
     padding: 15px;
     display: flex;

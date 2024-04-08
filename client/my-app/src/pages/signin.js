@@ -1,66 +1,101 @@
-// import logo from '../public/logo.svg';
-
-import './pages.css';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import './pages.css';
+
 function Signin() {
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap')
-    </style>
-    
-    const navigate = useNavigate();
-
-    const homepageNav = () => {
-      navigate('/userHomepage');
-    };
-
-    return (
-      <div className="page2">
-        <header className="page2_signup">
-          <div className="page5_signin">
-            <h1>Sign in</h1>
-          </div>
-          <div className="page2_buttons">
-            <div className="page2_personal">
-              <img src={'/logo.svg'} className="App-logo3" alt="logo" />
-            </div>
-          </div>
-
-          <div className="page2_inputfields">
-            <div className="businessname">
-              <label for="businessname">EMAIL</label>
-              <input type="text" id="businessname" name="businessname"></input>
-            </div>
-            <div className="businessname">
-              <label for="phonenumber">PASSWORD</label>
-              <input type="text" id="phonenumber" name="phonenumber"></input>
-            </div>
-            <div className="checkbox-container">
-              <input type="checkbox" id="rememberMeCheckbox" />
-              <label
-                htmlFor="rememberMeCheckbox"
-                className="checkbox-description"
-              >
-                Remember Me
-              </label>
-              <div className="forgot-password">
-                <p>
-                  <a href="#">Forgot Password</a>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <button onClick={homepageNav} className="sign-up-button"> Log in</button>
-          <div className="page2_account">
-            <p>
-              Don't have an account? <a href="./signup">Sign Up</a>
-            </p>
-          </div>
-      
-        </header>
-      </div>
-    );
-  }
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
   
+  const navigate = useNavigate();
+
+  const handleSignUp = () => {
+    navigate('/signup');
+  };
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:8080/users', {
+        user: email, 
+        pass: password, 
+      });
+  
+      const loginData = response.data;
+  
+      if (loginData.message === "User Not Found" || loginData.message === "Incorrect Password") {
+        setMessage('Invalid login credentials. Please try again.');
+      } else {
+        setMessage('Login successful!');
+
+        handleloginandHomepage();
+      }
+    } catch (error) {
+      console.error('Error occurred during login:', error); 
+      setMessage('An error occurred during login. Please try again later.');
+    }
+  };
+  
+  const handleloginandHomepage = () => {
+    navigate('/userHomepage');
+  };
+  
+
+  return (
+    <div className="page2">
+      <header className="page2_signup">
+        <div className="page2_signin">
+          <h1>Sign in</h1>
+        </div>
+        <div className="page2_buttons">
+          <div className="page2_personal">
+            <img src={'/logo.svg'} className="App-logo3" alt="logo" />
+          </div>
+        </div>
+        <div className="page2_inputfields">
+          <div className="businessname">
+            <label htmlFor="email">EMAIL</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="businessname">
+            <label htmlFor="password">PASSWORD</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="checkbox-container">
+            <input type="checkbox" id="rememberMeCheckbox" />
+            <label htmlFor="rememberMeCheckbox" className="checkbox-description">
+              Remember Me
+            </label>
+            <div className="forgot-password">
+              <p>
+                <a href="#">Forgot Password</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <button onClick={handleLogin}>Login</button>
+        <div className="page2_account">
+          <p>
+          Don't have an account? <a href="#" onClick={handleSignUp}>Sign Up</a>
+          </p>
+        </div>
+        {message && <p className="error-message">{message}</p>}
+      </header>
+    </div>
+  );
+}
+
 export default Signin;
