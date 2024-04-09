@@ -34,7 +34,7 @@ export async function getAllRestaurantsByUserId(user_id) {
 
 export async function getAllCustomersByUserId(user_id) {
   const [recievers] = await pool.query(
-    `SELECT DISTINCT C.first_name, C.last_name FROM customers AS C JOIN messages AS M ON C.user_id = M.sender_id OR C.user_id = M.reciever_id WHERE M.sender_id = ? OR M.reciever_id = ?`,
+    `SELECT DISTINCT C.first_name, C.last_name, C.user_id, M.sent_at FROM customers AS C JOIN messages AS M ON C.user_id = M.sender_id OR C.user_id = M.receiver_id WHERE M.sender_id = ? OR M.receiver_id = ?`,
     [user_id, user_id]
   );
   return recievers;

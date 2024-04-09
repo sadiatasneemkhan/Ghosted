@@ -47,11 +47,11 @@ router.get("/restaurants/:user_id", async (req, res) => {
 router.get("/customers/:user_id", async (req, res) => {
   try {
     const user_id = req.params.user_id;
-    const recievers = await getAllCustomersByUserId;
+    const recievers = await getAllCustomersByUserId(user_id);
     res.send(recievers);
   } catch (error) {
     console.error;
-    res.status(500).send("Failed to retrieve all conversing customers");
+    res.status(500).send(error);
   }
 });
 
