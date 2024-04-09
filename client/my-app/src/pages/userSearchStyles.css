@@ -38,6 +38,7 @@ button {
   height: 117px;
   background-color: white;
   border-radius: 18px;
+  border: 1px solid black;
 }
 
 .price-qty {
@@ -45,6 +46,7 @@ button {
   justify-content: space-between;
   margin-left: 10px;
   margin-right: 10px;
+  color: rgba(92, 177, 231, 1);
 }
 
 .qty-label,
@@ -123,12 +125,13 @@ button {
   font-weight: 700;
   line-height: 24px;
   letter-spacing: 0em;
+  position: relative;
   text-align: center;
-  margin-bottom: 20px;
+  top: 27px;
 }
 
 .view-cart {
-  margin-top: 25px;
+  margin-top: 50px;
   background-color: rgba(92, 177, 231, 1);
   color: white;
   border: none;

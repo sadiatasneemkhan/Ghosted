@@ -647,3 +647,8 @@
 .food-items1:hover{
     transform: scale(1.09);
 }
+
+.food-stuff img {
+    padding-top: 30px;
+    width: 310px;
+}

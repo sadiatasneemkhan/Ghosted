@@ -18,24 +18,24 @@ function Signin() {
   const handleLogin = async () => {
     try {
       const response = await axios.post('http://localhost:8080/users', {
-        user: email, 
-        pass: password, 
+        user: email,
+        pass: password,
       });
   
       const loginData = response.data;
   
-      if (loginData.message === "User Not Found" || loginData.message === "Incorrect Password") {
+      if (loginData.message === "User Not Found" || loginData.message === "Incorrect Password" || !loginData.length) {
         setMessage('Invalid login credentials. Please try again.');
       } else {
         setMessage('Login successful!');
-
         handleloginandHomepage();
       }
     } catch (error) {
-      console.error('Error occurred during login:', error); 
+      console.error('Error occurred during login:', error);
       setMessage('An error occurred during login. Please try again later.');
     }
   };
+  
   
   const handleloginandHomepage = () => {
     navigate('/userHomepage');

@@ -59,14 +59,16 @@ function Homepage() {
             <p className="price-label">Price</p>
             <p className="price-value">$30.29</p>
           </div>
-        </div>
+        
         <div className="btn-ctn">
           <button className="add-to-cart">Add to cart</button>
         </div>
+        </div>
+          <div className="view-cart-btn-ctn" onClick={userCartItems}>
+            <button className="view-cart">View cart</button>
+          </div>
       </div>
-      <div className="view-cart-btn-ctn" onClick={userCartItems}>
-        <button className="view-cart">View cart</button>
-      </div>
+     
       <Navbar />
     </div>
   );

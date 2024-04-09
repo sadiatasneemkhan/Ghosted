@@ -1,10 +1,4 @@
-// import logo from '../public/logo.svg';
-// import userProfile from '../public/userProfile.svg';
-// import businessLogo from '../public/business-logo.svg';
-// import searchIcon from '../public/searchIcon.svg';
-// import homeIcon from '../public/homeIcon.svg';
-// import chatIcon from '../public/chatIcon.svg';
-// import settingIcon from '../public/settingIcon.svg';
+
 import './pages.css';
 import Navbar from '../components/Navbar';
 
