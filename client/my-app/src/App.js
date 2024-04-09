@@ -19,6 +19,7 @@ import GuestFoodClick from './pages/guestFoodClick';
 import GuestSearch from './pages/guestSearch';
 import BusinessHomePage from './pages/businessHomepage';
 import BusinessEdit from './pages/businessEdit';
+import BusinessAddItem from './pages/businessAddItem';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
       <Route path="/userNewChat" element={<UserNewChat />} />
       <Route path="/businessHomepage" element={<BusinessHomePage />} /> 
       <Route path="/businessEdit" element={<BusinessEdit />} /> 
+      <Route path="/businessAddItem" element={<BusinessAddItem />} />
       {/*  */}
       <Route path="/welcome" element={<Welcome />} />
     </Routes>

@@ -136,6 +136,24 @@ button {
   margin-bottom: 20px;
 }
 
+.add-to-cart2 {
+  width: auto;
+  height: 43.74px;
+  background-color: rgba(92, 177, 231, 1);
+  border: none;
+  border-radius: 7px;
+  color: white;
+  font-family: Rubik;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 375px;
+}
+
+
 .view-cart {
   margin-top: 25px;
   background-color: rgba(92, 177, 231, 1);

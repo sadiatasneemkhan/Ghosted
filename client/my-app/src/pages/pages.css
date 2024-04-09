@@ -614,6 +614,32 @@
     background-color: #E35959;
 }
 
+.business_edit_button2{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.business_edit_button3 button{
+    width: 169.5px;
+    height: 50px;
+    border-radius: 19px;
+    margin: 140px 5px 0px 5px;
+    border: 3px solid #FFFFFF;
+    font-family: "Rubik", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #FFFFFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.save_changes3{
+    background-color: #5CB1E7;
+}
+
+.log_out3{
+    background-color: #E35959;
+}
 .checkbox-container {
     display: flex;
     align-items: center;

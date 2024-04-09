@@ -6,12 +6,21 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
-function BusinessEdit() {
+function BusinessAddItem() {
   const navigate = useNavigate();
   const [menuItems, setMenuItems] = useState([]);
   const [editItem, setEditItem] = useState(null);
   const username = "test";
   const item = "test";
+  const [menuItem, setMenuItem] = useState({
+    name: '',
+    description: '',
+    price: 0,
+    isAvailable: true, 
+    categoryId: '', 
+    image: '', 
+    prepTime: 0, 
+  });
 
   const homeNavigate = () => {
     navigate('/businessHomepage');
@@ -33,43 +42,29 @@ function BusinessEdit() {
     navigate('/businessHomepage');
   }
 
-  useEffect(() => {
-    fetchMenuItem();
-  }, []);
-
-  const fetchMenuItem = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3000/restaurant/${username}`);
-      setMenuItems(response.data);
-    } catch (error) {
-      console.error("There was an error fetching the menu item", error);
-    }
-  };
-
-  const updateMenuItem = async (menuItemId, data) => {
-    try {
-      const response = await axios.put(`http://localhost:3000/restaurant/menu-item/${menuItemId}`, data);
-      console.log(response.data);
-      fetchMenuItem();
-      navigate('/businessHomepage');
-    } catch (error) {
-      console.error("There was an error updating the menu item", error);
-    }
-  };
-
-  const deleteMenuItem = async (menuItemId, restaurantId) => {
-    try {
-      await axios.delete(`http://localhost:3000/${menuItemId}/${restaurantId}`);
-      fetchMenuItem();
-      navigate('/businessHomepage');
-    } catch (error) {
-      console.error("There was an error deleting the menu item", error);
-    }
-  };
+  const addItemNavigate = () => {
+    navigate('/businessAddItem');
+  }
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
-    setEditItem(prev => ({ ...prev, [name]: value }));
+    setMenuItem(prev => ({ ...prev, [name]: value }));
+  };
+
+  const addNewMenuItem = async () => {
+    try {
+      const response = await axios.post(`http://localhost:3000/menu-item`, { menuItem, restaurantId });
+      console.log(response.data);
+      navigate('/businessHomepage');
+    }
+    catch (error) {
+      console.error("There was an error adding the menu item", error);
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    addNewMenuItem(); 
   };
 
   const discardChanges = () => {
@@ -84,7 +79,7 @@ function BusinessEdit() {
       <div className="main-ctn2">
         <div className="food-stuff2">
           <img src="/specificfood.png"></img>
-          <p className="food-name">Food Name</p>
+          <p className="food-name">Food Name:</p>
           <input type="text" name="name"
             value={editItem?.name || item.name}
             onChange={handleEditChange}></input>
@@ -104,17 +99,11 @@ function BusinessEdit() {
               onChange={handleEditChange}></input>
           </div>
         </div>
-        <div className="business_buttons1">
-          <button onClick={() => deleteMenuItem(item.menu_item_id)} className="delete_bus" type="button">
-            Delete Item
+        <div className="business_edit_button3">
+          <button className="save_changes3" type="submit" onClick={handleSubmit}>
+            Add Item
           </button>
-        </div>
-
-        <div className="business_edit_button2">
-          <button onClick={() => updateMenuItem(item.menu_item_id)} className="save_changes2" type="submit" >
-            Save Changes
-          </button>
-          <button className="log_out2" type="button" onClick={discardChanges}>
+          <button className="log_out3" type="button" onClick={discardChanges}>
             Discard Changes
           </button>
         </div>
@@ -129,4 +118,4 @@ function BusinessEdit() {
   );
 }
 
-export default BusinessEdit;
+export default BusinessAddItem;

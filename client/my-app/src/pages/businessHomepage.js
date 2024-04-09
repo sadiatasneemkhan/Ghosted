@@ -5,9 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function BusinessHomePage() {
+    const username = "test";
     const navigate = useNavigate();
 
     const [businessName, setBusinessName] = useState('');
+    const [menuItems, setMenuItems] = useState([]);
 
     const homeNavigate = () => {
         navigate('/businessHomepage');
@@ -21,43 +23,47 @@ function BusinessHomePage() {
         navigate('/businessProfile');
     }
 
-    const editNavigate = () => {
-        navigate('/businessEdit');
+
+    const addItemNavigate = () => {
+        navigate('/businessAddItem');
     }
-    const [menuItems, setMenuItems] = useState([]);
 
     useEffect(() => {
-       
-        const fetchBusinessInfo = async () => {
-            try {
-                
-                const response = await axios.get('');
-               
-                setBusinessName(response.data.business_name);
-            } catch (error) {
-                console.error('Failed to fetch business info:', error);
-                
-                setBusinessName('Your Business');
-            }
-        };
-
-        const fetchMenuItems = async () => {
-            try {
-                const response = await axios.get('');
-                
-                const simulatedMenuItems = response.data.slice(0, 10).map((post) => ({
-                    menu_item_id: post.id,
-                    name: post.title,
-                }));
-                setMenuItems(simulatedMenuItems);
-            } catch (error) {
-                console.error('Failed to fetch menu items:', error);
-            }
-        };
-
         fetchBusinessInfo();
-        fetchMenuItems();
-    }, []); 
+        //fetchMenu();
+    }, [username]);
+
+    const fetchBusinessInfo = async () => {
+        try {
+            const response = await axios.get(`http://localhost:3000/${username}`);
+            setBusinessName(response.data.business_name);
+        } catch (error) {
+            console.error('Failed to fetch business info:', error);
+            setBusinessName('Your Business');
+        }
+    };
+
+    const fetchMenu = async () => {
+        try {
+            const response = await axios.get(`http://localhost:3000/restaurant/${username}`);
+            setMenuItems(response.data);
+        } catch (error) {
+            console.error('Failed to fetch menu items:', error);
+        }
+    };
+
+    async function fetchMenuItems(menuItemId) {
+        try {
+            const response = await axios.get(`http://localhost:3000/menu-item/${menuItemId}`);
+            setMenuItems(response.data);
+        } catch (error) {
+            console.error('', error);
+        }
+    }
+
+    function editNavigate(menuItemId) {
+        navigate(`/businessEdit/${menuItemId}`); 
+    }
 
     return (
         <div className="HomepageMainCon">
@@ -79,17 +85,20 @@ function BusinessHomePage() {
             <div className="scrollable-containerr2">
                 <div className="food-items">
                     {menuItems.map((item) => (
-                        <div key={item.menu_item_id} onClick={editNavigate} style={{ cursor: 'pointer' }}>
-                            <img 
-                                src={item.image || '/images/default-item-image.png'} 
-                                alt={item.name} 
-                                className="food-items1" 
-                                draggable="false" 
+                        <div key={item.menu_item_id} onClick={() => editNavigate(item.menu_item_id)} style={{ cursor: 'pointer' }}>
+                            <img
+                                src={item.image || '/images/default-item-image.png'}
+                                alt={item.name}
+                                className="food-items1"
+                                draggable="false"
                             />
                             <p>{item.name}</p>
                         </div>
                     ))}
                 </div>
+            </div>
+            <div className="btn-ctn">
+                <button className="add-to-cart2" onClick={addItemNavigate}>Add New Item</button>
             </div>
             <footer className="bottom_nav">
                 <img src={'/HomeIconB.svg'} onClick={homeNavigate} className="home_icon" alt="home icon" style={{ cursor: 'pointer' }} />
