@@ -7,6 +7,11 @@ import userRouter from "./routes/users.js";
 import customerRouter from "./routes/customers.js";
 import restaurantRouter from "./routes/restaurants.js";
 import messagesRouter from "./routes/messages.js";
+import orderItemsRouter from './routes/orderItems.js'; 
+import ordersRouter from './routes/orders.js'; 
+import cartRouter from './routes/cart.js'; 
+import cartItemsRouter from './routes/cartItems.js'; 
+import menuItemsRouter from './routes/menuItems.js'; 
 import {
   createMessage,
   getConversationByUserId,
@@ -22,6 +27,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.use('/order_items', orderItemsRouter);
+app.use('/orders', ordersRouter);
+app.use('/cart', cartRouter);
+app.use('/cart_items', cartItemsRouter);
+app.use('/menu_items', menuItemsRouter);
 app.use("/users", userRouter);
 app.use("/customers", customerRouter);
 app.use("/restaurants", restaurantRouter);
