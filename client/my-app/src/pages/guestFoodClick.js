@@ -20,10 +20,6 @@ function GuestFoodClick() {
     navigate('/guestHomepage');
   }
 
-  const chatNavigate = () => {
-    navigate('/signupPersonal');
-  };
-
   const settingNavigate = () => {
     navigate('/signupPersonal');
   }
@@ -31,6 +27,19 @@ function GuestFoodClick() {
   const foodClickNavigate = () => {
     navigate('/guestFoodClick');
   }
+
+  const welcomeNavigate = () => {
+    navigate('/welcome');
+  };
+  
+  const profileNavigate = () => {
+    navigate('/userProfile');
+  };
+
+  const chatNavigate = () => {
+    navigate('/userChat');
+  };
+  
 
   return (
     <>
@@ -61,10 +70,16 @@ function GuestFoodClick() {
         <button className="view-cart-btn" onClick={navigateCart}>View cart</button>
 
         <footer className="bottom_nav">
-        <img src={'/HomeIconB.svg'} onClick={homeNavigate} className="home_icon" alt="home icon" style={{ cursor: 'pointer' }} draggable="false"/>
-        <img src={'/ChatIconG.svg'} onClick={chatNavigate} cclassName="chat_icon" alt="chat icon" style={{ cursor: 'pointer' }} draggable="false" />
-        <img src={'/SettingIconG.svg'} onClick={settingNavigate} className="setiing_icon" alt="setting icon" style={{ cursor: 'pointer' }} draggable="false"/>
-      </footer>
+          <a href="/welcome" onClick={welcomeNavigate}>
+            <img src={'/homeIcon.svg'} className="home_icon" alt="home icon" />
+          </a>
+          <a href="/userChat" onClick={chatNavigate}>
+            <img src={'/chatIcon.svg'} className="chat_icon" alt="chat icon" />
+          </a>
+          <a href="/userProfile" onClick={profileNavigate}>
+            <img src={'/settingIcon.svg'} className="setting_icon" alt="setting icon" />
+          </a>
+        </footer>
       </div>
       
     </>

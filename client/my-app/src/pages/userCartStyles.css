@@ -59,7 +59,7 @@ hr {
 }
 
 .remove-button {
-  margin-right: 20px;
+  margin-right: 3px;
   background-color: rgba(214, 78, 78, 1);
   color: white;
   border: none;
@@ -96,12 +96,12 @@ hr {
   line-height: 24px;
   letter-spacing: 0em;
 }
-
+/* 
 .line {
   width: calc(100% - 24px);
   height: 1px;
   background-color: rgba(92, 177, 231, 1);
-}
+} */
 
 .second-ctn {
   margin-top: -5px;
