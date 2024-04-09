@@ -70,11 +70,16 @@ function Homepage() {
             <p className="price-label">Price</p>
             <p className="price-value">$30.29</p>
           </div>
-        </div>
+        
         <div className="btn-ctn">
           <button className="add-to-cart">Add to cart</button>
         </div>
+        </div>
+          <div className="view-cart-btn-ctn" onClick={userCartItems}>
+            <button className="view-cart">View cart</button>
+          </div>
       </div>
+<<<<<<< HEAD
       <div className="view-cart-btn-ctn" onClick={userCartItems}>
         <button className="view-cart">View cart</button>
       </div>
@@ -83,6 +88,10 @@ function Homepage() {
         <img src={'/ChatIconG.svg'} onClick={chatNavigate} className="chat_icon" alt="chat icon" style={{ cursor: 'pointer' }} />
         <img src={'/SettingIconG.svg'} onClick={settingNavigate} className="setiing_icon" alt="setting icon" style={{ cursor: 'pointer' }} />
       </footer>
+=======
+     
+      <Navbar />
+>>>>>>> b7c2f6dab64adc93894707a920ae1254865ac02a
     </div>
   );
 }
