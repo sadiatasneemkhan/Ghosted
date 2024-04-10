@@ -49,6 +49,8 @@
     padding-top: 10px;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    overflow: scroll;
     width: 330px;
     background-color: #D9EDFF;
     margin-left: 30px;
