@@ -7,6 +7,7 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 import ChatBubble from "../components/MessageBubble";
+import axios from "axios";
 
 function UserNewChat() {
   const textareaRef = useRef(null);
@@ -19,13 +20,42 @@ function UserNewChat() {
   const [message, setMessage] = useState("");
   const room = "some_room_id";
   const [connectionStatus, setConnectionStatus] = useState("Not connected");
+  const [recipient, setRecipient] = useState([]);
 
   //   HARDCODED!
-  const senderId = 2;
+  // const senderId = 2;
+  // const userType = "restaurant";
+  const senderId = 1;
+  const userType = "customer";
+  const port = 8080;
 
   //   not hardcoded
   const splitted = window.location.pathname.split("/");
   const receiverId = splitted[2];
+
+  const getRecipientInfo = async (userId) => {
+    if (userType === "restaurant") {
+      try {
+        const response = await axios.get(
+          `http://localhost:${port}/messages/convo_customer/${receiverId}`
+        );
+        console.log(response);
+        setRecipient(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      try {
+        const response = await axios.get(
+          `http://localhost:${port}/messages/convo_business/${receiverId}`
+        );
+        console.log(response);
+        setRecipient(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   useEffect(() => {
     const newSocket = io("http://localhost:8080", {
@@ -59,6 +89,17 @@ function UserNewChat() {
       newSocket.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    getRecipientInfo(receiverId);
+  }, [receiverId]);
+
+  useEffect(() => {
+    if (chatAreaRef.current) {
+      const element = chatAreaRef.current;
+      element.scrollTop = element.scrollHeight;
+    }
+  }, [messages]);
 
   useEffect(() => {
     const setInitialSizes = () => {
@@ -142,7 +183,11 @@ function UserNewChat() {
           />
         </div>
         <div className="business_name">
-          <h2>Business Name</h2>
+          <h2>
+            {userType === "restaurant"
+              ? recipient.first_name
+              : recipient.business_name}
+          </h2>
         </div>
         <div className="business-pfp">
           <img

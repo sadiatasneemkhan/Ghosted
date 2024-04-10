@@ -7,7 +7,7 @@ function ChatBubble({ message, isUser }) {
     <div className={`chat-bubble ${isUser ? "user" : "other"}`}>
       <p className="message-content">{message.content}</p>
       <span className="timestamp">
-        {moment(message.sent_at).format("HH:MM")}
+        {moment(message.sent_at).format("MMM-DD HH:MM")}
       </span>
     </div>
   );

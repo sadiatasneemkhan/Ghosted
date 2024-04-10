@@ -55,6 +55,7 @@
     background-color: #D9EDFF;
     margin-left: 30px;
     height: 550px;
+    scroll-behavior: smooth; 
 }
 
 .type_message {
