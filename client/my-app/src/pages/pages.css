@@ -430,11 +430,12 @@
 }
 
 .date_alt {
-    padding-left: 33px;
+width: max-content;
+padding-right: 20px;
 }
 
 .name_content{
-    padding-right: 50px;
+    padding-right: 15px;
 }
 
 .bottom_nav{

@@ -10,6 +10,7 @@ import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 function BusinessChat() {
   <style>
@@ -17,9 +18,16 @@ function BusinessChat() {
     url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap')
   </style>;
 
+  // HARCODED!!
   const userId = 2;
   const restaurantId = 1;
   const businessName = "Jane's Kitchen";
+
+  const navigate = useNavigate();
+
+  const navigateToChat = (receiverId) => {
+    navigate(`/userNewChat/${receiverId}`);
+  };
 
   // ideally gotten from some env file
   const port = 8080;
@@ -52,7 +60,11 @@ function BusinessChat() {
     return (
       <>
         {customers.map((cust) => (
-          <div className="chat">
+          <div
+            className="chat"
+            onClick={() => navigateToChat(cust.user_id)}
+            key={cust.user_id}
+          >
             <img
               src={"/userProfile.svg"}
               className="sender_pfp"
@@ -63,7 +75,7 @@ function BusinessChat() {
               <p className="sender_msg">Open chat to view messages</p>
             </div>
             <p className="date_alt">
-              {moment(cust.sent_at).format("YYYY-MM-DD")}
+              {moment(cust.sent_at).format("YYYY/MM/DD")}
             </p>
           </div>
         ))}

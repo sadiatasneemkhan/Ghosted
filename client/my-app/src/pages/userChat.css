@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: space-between; 
     padding: 10px;
-    background-color: #FFF;
+    background-color: hsl(0, 0%, 100%);
     flex-wrap: nowrap;
 }
 
@@ -17,8 +17,10 @@
     margin-left: 20px;
 }
 
-.back_button img {
+.back_button  {
     width: 25px;
+    margin-left: 20px;
+    cursor: pointer;
 }
 
 .business_name {
@@ -44,6 +46,9 @@
 }
 
 .chat_area{
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
     width: 330px;
     background-color: #D9EDFF;
     margin-left: 30px;
@@ -102,3 +107,10 @@
 h2{
     font-size: 22px;
 }
+
+.fa-svg-icon {
+    font-size: 1.3rem;
+    margin-right: 5px;
+    cursor: pointer;
+}
+

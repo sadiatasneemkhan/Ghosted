@@ -17,6 +17,7 @@ import UserHomepage from "./pages/userHomepage";
 import GuestHomepage from "./pages/guestHomepage";
 import GuestFoodClick from "./pages/guestFoodClick";
 import GuestSearch from "./pages/guestSearch";
+import SocketTest from "./pages/socketTest";
 
 function App() {
   return (
@@ -37,9 +38,9 @@ function App() {
       <Route path="/userSearch" element={<UserSearch />} />
       <Route path="/guestSearch" element={<GuestSearch />} />
       <Route path="/userCart" element={<UserCart />} />
-      <Route path="/userNewChat" element={<UserNewChat />} />
-      {/*  */}
+      <Route path="/userNewChat/:recieverId" element={<UserNewChat />} />
       <Route path="/welcome" element={<Welcome />} />
+      <Route path="/sockettest" element={<SocketTest />} />
     </Routes>
   );
 }
