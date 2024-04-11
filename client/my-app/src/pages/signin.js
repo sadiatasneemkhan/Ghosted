@@ -24,12 +24,11 @@ function Signin() {
   
       const loginData = response.data;
   
-      if (loginData.message === "User Not Found" || loginData.message === "Incorrect Password" || !loginData.length) {
-        setMessage('Invalid login credentials. Please try again.');
-      } else {
-        setMessage('Login successful!');
-        handleloginandHomepage();
-      }
+    if (loginData.message !== "User Not Found" && loginData.message !== "Incorrect Password" && loginData.length) {
+      setMessage('Login successful!');
+      localStorage.setItem('user_id', loginData.user_id); // Store user_id in localStorage
+      handleloginandHomepage();
+    }
     } catch (error) {
       console.error('Error occurred during login:', error);
       setMessage('An error occurred during login. Please try again later.');

@@ -1,20 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './userFoodClickStyles.css';
 import Navbar from '../components/Navbar';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
 function UserFoodClick() {
-
+  const [menuItem, setMenuItem] = useState([]);
   const navigate = useNavigate();
+  const userId = localStorage.getItem('user_id'); // Retrieve user_id from localStorage
 
-  const userFoodItems = () => {
+  useEffect(() => {
+    // Fetching the restaurant_id for the user
+    axios.get(`http://localhost:8080/user/${userId}`)
+      .then(response => {
+        const restaurantId = response.data;
+
+        // Then, fetching the menu items for the restaurant
+        axios.get(`http://localhost:8080/restaurant/${restaurantId}`)
+          .then(response => {
+            setMenuItem(response.data);
+          })
+          .catch(error => {
+            console.error('There was an error!', error);
+          });
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      });
+  }, []);
+
+  const userMenuItems = () => {
     navigate('/userSearch');
   };
   
   const userCartItems = () => {
     navigate('/userCart');
   };
+
   return (
     <>
       <div className="HomepageMainCon">
@@ -27,19 +49,10 @@ function UserFoodClick() {
         <p className="address">Address</p>
       </div>
       <div className="scrollable-containerr">
-        <div className="food-items" onClick={userFoodItems}>
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
-          <img src="food.png" alt="Food Item 1" />
+        <div className="food-items" onClick={userMenuItems}>
+          {menuItem.map((item) => (
+            <img key={item.id} src="food.png" alt={item.name} />
+          ))}
         </div>
         <button className="view-cart-btn" onClick={userCartItems}>View cart</button>
 
