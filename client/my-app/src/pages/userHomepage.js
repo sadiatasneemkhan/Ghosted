@@ -17,6 +17,7 @@ function UserHomepage() {
   const chatNavigate = () => {
     navigate('/userChat');
   };
+
   const settingNavigate = () => {
     navigate('/userProfile');
   }
@@ -26,10 +27,6 @@ function UserHomepage() {
   }
   const welcomeNavigate = () => {
     navigate('/welcome');
-  };
-
-  const chatNavigate = () => {
-  navigate('/userChat');
   };
     
   const profileNavigate = () => {

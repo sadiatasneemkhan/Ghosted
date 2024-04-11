@@ -8,7 +8,19 @@ function UserFoodClick() {
   const [menuItem, setMenuItem] = useState([]);
   const navigate = useNavigate();
   const userId = localStorage.getItem('user_id'); // Retrieve user_id from localStorage
+ 
+  const homeNavigate = () => {
+    navigate('/userHomepage');
+  };
 
+  const settingNavigate = () => {
+    navigate('/userProfile');
+  }
+
+  const chatNavigate = () => {
+    navigate('/userChat');
+  };
+  
   useEffect(() => {
     // Fetching the restaurant_id for the user
     axios.get(`http://localhost:8080/user/${userId}`)
