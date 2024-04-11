@@ -83,13 +83,13 @@ function GuestFoodClick() {
 
         <footer className="bottom_nav">
           <a href="/welcome" onClick={welcomeNavigate}>
-            <img src={'/homeIcon.svg'} className="home_icon" alt="home icon" />
+            <img src={'/homeIconB.svg'} className="home_icon" alt="home icon" />
           </a>
           <a href="/userChat" onClick={chatNavigate}>
-            <img src={'/chatIcon.svg'} className="chat_icon" alt="chat icon" />
+            <img src={'/chatIconG.svg'} className="chat_icon" alt="chat icon" />
           </a>
           <a href="/userProfile" onClick={profileNavigate}>
-            <img src={'/settingIcon.svg'} className="setting_icon" alt="setting icon" />
+            <img src={'/settingIconG.svg'} className="setting_icon" alt="setting icon" />
           </a>
         </footer>
       </div>

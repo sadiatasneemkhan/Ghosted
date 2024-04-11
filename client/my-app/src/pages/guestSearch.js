@@ -27,10 +27,17 @@ function Homepage() {
     navigate('/userCart');
   };
 
+  const settingNavigate = () => {
+    navigate('/signup')
+;  }
+
   const increment = () => {
     setCount(count + 1);
   };
 
+  const welcomeNavigate = () => {
+    navigate('/guestHomepage');
+  }
   const decrement = () => {
     if (count > 0) {
       setCount(count - 1);
@@ -94,7 +101,17 @@ function Homepage() {
           </div>
       </div>
      
-      <Navbar />
+      <footer className="bottom_nav">
+        <a href="/welcome" onClick={welcomeNavigate}>
+          <img src={'/HomeIconG.svg'} className="home_icon" alt="home icon" />
+        </a>
+        <a href="/userChat" onClick={settingNavigate}>
+          <img src={'/ChatIconB.svg'} className="chat_icon" alt="chat icon" />
+        </a>
+        <a href="/userProfile" onClick={settingNavigate}>
+          <img src={'/SettingIconB.svg'} className="setting_icon" alt="setting icon" />
+        </a>
+      </footer>
     </div>
   );
 }

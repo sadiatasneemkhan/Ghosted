@@ -8,6 +8,19 @@ function Homepage() {
   const [cartItems, setCartItems] = useState([]);
   const [error, setError] = useState(null);
 
+  const homeNavigate = () => {
+    navigate('/userHomepage');
+  };
+
+  const chatNavigate = () => {
+    navigate('/userChat');
+  };
+
+  const settingNavigate = () => {
+    navigate('/userProfile');
+  }
+
+
   useEffect(() => {
     const userId = localStorage.getItem('user_id'); // Retrieve user_id from localStorage
 
@@ -75,7 +88,17 @@ function Homepage() {
             </div>
           </div>
         </div>
-        <Navbar />
+        <footer className="bottom_nav">
+        <a href="/welcome" onClick={homeNavigate}>
+          <img src={'/homeIconB.svg'} className="home_icon" alt="home icon" />
+        </a>
+        <a href="/userChat" onClick={chatNavigate}>
+          <img src={'/chatIconG.svg'} className="chat_icon" alt="chat icon" />
+        </a>
+        <a href="/userProfile" onClick={settingNavigate}>
+          <img src={'/settingIconG.svg'} className="setting_icon" alt="setting icon" />
+        </a>
+      </footer>
       </>
     );
   }
