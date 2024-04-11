@@ -1,28 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './userFoodClickStyles.css';
 import Navbar from '../components/Navbar';
+import axios from 'axios'; 
 import { useNavigate } from 'react-router-dom';
 
-
 function GuestFoodClick() {
-
+  const [menuItems, setMenuItems] = useState([]);
   const navigate = useNavigate();
+  const userId = localStorage.getItem('user_id'); // Retrieve user_id from localStorage
+
+  useEffect(() => {
+    // Fetching the restaurant_id for the user
+    axios.get(`http://localhost:8080/user/${userId}`)
+      .then(response => {
+        const restaurantId = response.data;
+
+        // Then, fetching the menu items for the restaurant
+        axios.get(`http://localhost:8080/restaurant/${restaurantId}`)
+          .then(response => {
+            setMenuItems(response.data);
+          })
+          .catch(error => {
+            console.error('There was an error!', error);
+          });
+      })
+      .catch(error => {
+        console.error('There was an errorrr!', error);
+      });
+  }, []);
 
   const guestFoodItems = () => {
     navigate('/guestSearch');
   };
   
   const navigateCart = () => {
-    navigate('/signup');
+    navigate('/userCart');
   };
   
   const homeNavigate = () => {
     navigate('/guestHomepage');
   }
-
-  const chatNavigate = () => {
-    navigate('/signupPersonal');
-  };
 
   const settingNavigate = () => {
     navigate('/signupPersonal');
@@ -31,6 +48,19 @@ function GuestFoodClick() {
   const foodClickNavigate = () => {
     navigate('/guestFoodClick');
   }
+
+  const welcomeNavigate = () => {
+    navigate('/welcome');
+  };
+  
+  const profileNavigate = () => {
+    navigate('/userProfile');
+  };
+
+  const chatNavigate = () => {
+    navigate('/userChat');
+  };
+  
 
   return (
     <>
@@ -45,26 +75,23 @@ function GuestFoodClick() {
       </div>
       <div className="scrollable-containerr">
         <div className="food-items">
-          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={guestFoodItems} style={{ cursor: 'pointer' }} draggable="false"/>
-          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={guestFoodItems} style={{ cursor: 'pointer' }} draggable="false" />
-          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={guestFoodItems} style={{ cursor: 'pointer' }} draggable="false"/>
-          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={guestFoodItems} style={{ cursor: 'pointer' }} draggable="false"/>
-          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={guestFoodItems} style={{ cursor: 'pointer' }} draggable="false"/>
-          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={guestFoodItems} style={{ cursor: 'pointer' }} draggable="false"/>
-          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={guestFoodItems} style={{ cursor: 'pointer' }} draggable="false"/>
-          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={guestFoodItems} style={{ cursor: 'pointer' }} draggable="false"/>
-          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={guestFoodItems} style={{ cursor: 'pointer' }} draggable="false"/>
-          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={guestFoodItems} style={{ cursor: 'pointer' }} draggable="false"/>
-          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={guestFoodItems} style={{ cursor: 'pointer' }} draggable="false"/>
-          <img className="food-items1" src="food.png" alt="Food Item 1" onClick={guestFoodItems} style={{ cursor: 'pointer' }} draggable="false"/>
+          {menuItems.map((item) => (
+            <img key={item.id} className="food-items1" src="food.png" alt={item.name} onClick={guestFoodItems} style={{ cursor: 'pointer' }} draggable="false"/>
+          ))}
         </div>
         <button className="view-cart-btn" onClick={navigateCart}>View cart</button>
 
         <footer className="bottom_nav">
-        <img src={'/HomeIconB.svg'} onClick={homeNavigate} className="home_icon" alt="home icon" style={{ cursor: 'pointer' }} draggable="false"/>
-        <img src={'/ChatIconG.svg'} onClick={chatNavigate} cclassName="chat_icon" alt="chat icon" style={{ cursor: 'pointer' }} draggable="false" />
-        <img src={'/SettingIconG.svg'} onClick={settingNavigate} className="setiing_icon" alt="setting icon" style={{ cursor: 'pointer' }} draggable="false"/>
-      </footer>
+          <a href="/welcome" onClick={welcomeNavigate}>
+            <img src={'/homeIcon.svg'} className="home_icon" alt="home icon" />
+          </a>
+          <a href="/userChat" onClick={chatNavigate}>
+            <img src={'/chatIcon.svg'} className="chat_icon" alt="chat icon" />
+          </a>
+          <a href="/userProfile" onClick={profileNavigate}>
+            <img src={'/settingIcon.svg'} className="setting_icon" alt="setting icon" />
+          </a>
+        </footer>
       </div>
       
     </>
