@@ -8,10 +8,11 @@ function UserSearch() {
   const { menu_item_id } = useParams();
   const [menuItem, setMenuItem] = useState(null);
   const [count, setCount] = useState(0);
+  const [price, setPrice] = useState(0);
   const restaurantId = localStorage.getItem(1); // Retrieve restaurant_id from localStorage
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/menu_items/1`)
+    axios.get(`http://localhost:8080/menu_items/:menu_item_id`)
       .then(response => {
         setMenuItem(response.data);
       })
@@ -19,6 +20,12 @@ function UserSearch() {
         console.error('There was an error!', error);
       });
   }, [menu_item_id]);
+
+  useEffect(() => {
+    if (menuItem) {
+      setPrice((menuItem.price * count).toFixed(2));
+    }
+  }, [count, menuItem]);
 
   const userCartItems = () => {
     navigate('/userCart');
@@ -36,7 +43,7 @@ function UserSearch() {
 
   const addToCart = () => {
     if (menuItem) {
-      axios.post(`http://localhost:8080/menu_items/1/add-to-cart`, {
+      axios.post(`http://localhost:8080/menu_items/:menu_item_id/add-to-cart`, {
         restaurant_id: restaurantId,
         name: menuItem.name,
         description: menuItem.description,
@@ -80,7 +87,7 @@ function UserSearch() {
             </div>
             <div className="price">
               <p className="price-label">Price</p>
-              <p className="price-value">${(menuItem.price * count).toFixed(2)}</p>
+              <p className="price-value">${price}</p>
             </div>
             <div className="btn-ctn">
               <button className="add-to-cart" onClick={addToCart}>Add to cart</button>
