@@ -26,6 +26,7 @@ export async function getUser(email, password) {
         `SELECT U.user_id, UT.user_type, U.phone FROM users AS U JOIN user_types AS UT ON U.user_type_id = UT.user_type_id WHERE U.email = ?`,
         [email]
       );
+      console.log(rows);
       return rows;
     } else {
       return { message: "Incorrect Password" };
