@@ -11,7 +11,7 @@ function Signin() {
   
   const navigate = useNavigate();
 
-  const handleSignUp = () => {
+  const signupNavigate = () => {
     navigate('/signup');
   };
 
@@ -96,7 +96,7 @@ function Signin() {
         <button onClick={handleLogin}>Login</button>
         <div className="page2_account">
           <p>
-          Don't have an account? <a href="#" onClick={handleSignUp}>Sign Up</a>
+          Don't have an account? <a href="#" onClick={signupNavigate}>Sign Up</a>
           </p>
         </div>
         {message && <p className="error-message">{message}</p>}

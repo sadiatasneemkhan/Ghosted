@@ -3,7 +3,7 @@
 import './pages.css';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Route, Navigate, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 
 function Signup() {
   <style>
