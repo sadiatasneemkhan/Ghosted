@@ -4,6 +4,7 @@ import "./userCartStyles.css";
 import Navbar from "../components/Navbar";
 import DateSelector from "../components/DateSelector";
 import { useNavigate } from "react-router-dom";
+
 function Homepage() {
   const [cartItems, setCartItems] = useState([]);
   const [error, setError] = useState(null);
@@ -21,11 +22,11 @@ function Homepage() {
     navigate("/userProfile");
   };
 
-  useEffect(() => {
-    const userId = localStorage.getItem("user_id"); // Retrieve user_id from localStorage
+  const userId = "1";
 
+  useEffect(() => {
     axios
-      .get(`http://localhost:8080/cart/${userId}`) // Include user_id in the request
+      .get(`http://localhost:8080/cart/${userId}`)
       .then((response) => {
         setCartItems(response.data);
       })
@@ -48,19 +49,17 @@ function Homepage() {
       });
   };
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else {
-    return (
-      <>
-        <div className="HomepageMainCon">
-          <img src={"/logo.svg"} className="App-logo-small" alt="logo" />
-          <h1 className="Home-title">Home</h1>
-          <div className="main-ctn">
-            <span className="cart-label">Cart</span>
-            <hr />
-            <div className="scrollable-container">
-              {cartItems.map((item) => (
+  return (
+    <>
+      <div className="HomepageMainCon">
+        <img src={"/logo.svg"} className="App-logo-small" alt="logo" />
+        <h1 className="Home-title">Home</h1>
+        <div className="main-ctn">
+          <span className="cart-label">Cart</span>
+          <hr />
+          <div className="scrollable-container">
+            {cartItems.length > 0 ? (
+              cartItems.map((item) => (
                 <div key={item.id} className="item">
                   <img src="cartitem.png" alt="Item" className="item-image" />
                   <div className="item-details">
@@ -76,41 +75,43 @@ function Homepage() {
                   </button>
                   <div className="line"></div>
                 </div>
-              ))}
+              ))
+            ) : (
+              <p>No items in the cart</p>
+            )}
+          </div>
+          <hr />
+          <div className="second-ctn">
+            <p className="total-price">Total Price: $44.29</p>
+            <div className="date-ctn">
+              <p className="selection-label">Select delivery date</p>
+              <DateSelector className="date-selector" />
             </div>
-            <hr />
-            <div className="second-ctn">
-              <p className="total-price">Total Price: $44.29</p>
-              <div className="date-ctn">
-                <p className="selection-label">Select delivery date</p>
-                <DateSelector className="date-selector" />
-              </div>
-              <div className="ins-ctn">
-                <p className="ins-label">Instructions</p>
-                <input className="ins-input" type="text"></input>
-              </div>
-              <button className="place-order">Place Order</button>
+            <div className="ins-ctn">
+              <p className="ins-label">Instructions</p>
+              <input className="ins-input" type="text"></input>
             </div>
+            <button className="place-order">Place Order</button>
           </div>
         </div>
-        <footer className="bottom_nav">
-          <a href="/welcome" onClick={homeNavigate}>
-            <img src={"/homeIconB.svg"} className="home_icon" alt="home icon" />
-          </a>
-          <a href="/userChat" onClick={chatNavigate}>
-            <img src={"/chatIconG.svg"} className="chat_icon" alt="chat icon" />
-          </a>
-          <a href="/userProfile" onClick={settingNavigate}>
-            <img
-              src={"/settingIconG.svg"}
-              className="setting_icon"
-              alt="setting icon"
-            />
-          </a>
-        </footer>
-      </>
-    );
-  }
+      </div>
+      <footer className="bottom_nav">
+        <a href="/welcome" onClick={homeNavigate}>
+          <img src={"/homeIconB.svg"} className="home_icon" alt="home icon" />
+        </a>
+        <a href="/userChat" onClick={chatNavigate}>
+          <img src={"/chatIconG.svg"} className="chat_icon" alt="chat icon" />
+        </a>
+        <a href="/userProfile" onClick={settingNavigate}>
+          <img
+            src={"/settingIconG.svg"}
+            className="setting_icon"
+            alt="setting icon"
+          />
+        </a>
+      </footer>
+    </>
+  );
 }
 
 export default Homepage;
