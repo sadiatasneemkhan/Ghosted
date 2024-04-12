@@ -42,17 +42,29 @@ function BusinessEdit() {
   const saveNavigate = () => {
     navigate("/businessHomepage");
   };
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleEditChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "image") {
       if (files && files[0]) {
         setMenuItem((prev) => ({ ...prev, image: files[0] }));
+        setSelectedFile(files[0].name); // Set the selected file name
       }
     } else {
       setMenuItem((prev) => ({ ...prev, [name]: value }));
     }
   };
+  // const handleEditChange = (e) => {
+  //   const { name, value, files } = e.target;
+  //   if (name === "image") {
+  //     if (files && files[0]) {
+  //       setMenuItem((prev) => ({ ...prev, image: files[0] }));
+  //     }
+  //   } else {
+  //     setMenuItem((prev) => ({ ...prev, [name]: value }));
+  //   }
+  // };
 
   const fetchMenuItem = async () => {
     try {
@@ -84,10 +96,12 @@ function BusinessEdit() {
 
     const formData = new FormData();
     Object.keys(menuItem).forEach((key) => {
-      if (key === "image" && menuItem[key] instanceof File) {
-        formData.append("file", menuItem[key]); // Ensure this key matches your Multer config
-      } else {
-        formData.append(key, menuItem[key].toString()); // Ensure all values are strings
+      if (menuItem[key] !== null && menuItem[key] !== undefined) {
+        if (key === "image" && menuItem[key] instanceof File) {
+          formData.append("file", menuItem[key]); // Ensure this key matches your Multer config
+        } else {
+          formData.append(key, menuItem[key].toString()); // Ensure all values are strings
+        }
       }
     });
 
@@ -188,12 +202,13 @@ function BusinessEdit() {
             <input
               type="file"
               id="file-upload"
-              name="file"
+              name="image"
               onChange={handleEditChange}
               className="upload-img"
             />
             <label htmlFor="file-upload" className="file-upload-btn">
-              Choose File
+              {selectedFile || "Choose File"}{" "}
+              {/* Display the selected file name or 'Choose File' */}
             </label>
           </div>
         </div>
