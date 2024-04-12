@@ -33,6 +33,17 @@ function BusinessChat() {
   const port = 8080;
 
   const [customers, setCustomers] = useState([]);
+  const homeNavigate = () => {
+    navigate("/guestHomepage");
+  };
+
+  const chatNavigate = () => {
+    navigate("/signupPersonal");
+  };
+
+  const settingNavigate = () => {
+    navigate("/signupPersonal");
+  };
 
   useEffect(() => {
     getCustomerChats(userId);
