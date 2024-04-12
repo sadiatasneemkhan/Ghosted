@@ -252,6 +252,27 @@
     font-size: 15px;
 }
 
+/* CSS for desktop view Sign In */
+@media (min-width: 768px) {
+    .page2_inputfields {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      align-items: center; /* Center align the input fields */
+      justify-content: left; /* Center align the input fields */
+    }
+
+    #email1 {
+        margin: 0px 30px 0px 35px;
+    }
+
+    #pass1 {
+        margin-right: 30px;
+    }
+  }
+  
+
 .verify_logo {
     position: absolute;
     display: flex;
