@@ -29,12 +29,21 @@ export async function getRestaurantByRestId(id) {
   return rows;
 }
 
+export async function getRestaurantLogoById(id) {
+  const [rows] = await pool.query(
+    `SELECT logo FROM restaurants WHERE user_id = ?`,
+    [id]
+  );
+  return rows[0];
+}
+
 export async function updateRestaurantLogoById(url, id) {
   const [rows] = await pool.query(
     `UPDATE restaurants SET logo = ? WHERE user_id = ?`,
     [url, id]
   );
-  return rows;
+  console.log[rows];
+  return rows[0];
 }
 
 export async function getRestaurantByUserId(id) {

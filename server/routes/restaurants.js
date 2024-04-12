@@ -16,6 +16,7 @@ import {
   resumeRestaurant,
   getAllRestaurants,
   updateRestaurantLogoById,
+  getRestaurantLogoById,
 } from "../controllers/restaurantsController.js";
 
 const router = express.Router();
@@ -31,8 +32,14 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+router.get("/logo/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  const url = await getRestaurantLogoById(userId);
+  res.send(url);
+});
+
 router.post("/logo/:userId", upload.single("file"), async (req, res) => {
-  const userId = req.params.userId; // Corrected to use userId
+  const userId = req.params.userId;
   console.log(req.body);
   console.log(req.file);
   if (!req.file) {
@@ -138,7 +145,7 @@ router.put("/delete/:user_id", async (req, res) => {
   if (result.affectedRows === 0) {
     res.status(404).send("Favourite not found");
   } else {
-    res.status(200).send("Successfully deleted");
+    console.log("Successfully deleted");
     res.send(result);
   }
 });

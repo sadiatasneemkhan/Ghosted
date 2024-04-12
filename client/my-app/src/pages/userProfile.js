@@ -1,7 +1,7 @@
 import "./pages.css";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 function UserProfile() {
@@ -12,6 +12,8 @@ function UserProfile() {
 
   const [profilePic, setProfilePic] = useState("default-profile.svg");
   const userId = 5;
+  const [file, setFile] = useState(null);
+
   const [userData, setUserData] = useState({
     first_name: "",
     last_name: "",
@@ -122,6 +124,39 @@ function UserProfile() {
     }
   }, [userData.first_name, userData.last_name]);
 
+  const fileInputRef = useRef(null);
+
+  async function handleImageChange(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      // API call to update the profile picture
+      await axios
+        .post(`http://localhost:8080/customers/pfp/${userId}`, formData)
+        .then((response) => {
+          setFile(response.data.path);
+          console.log("Profile picture updated successfully");
+          setImage();
+          setSaveStatus("Image changed successfully.");
+        })
+        .catch((error) => {
+          console.error("Failed to update profile picture", error);
+        });
+    }
+  }
+  async function setImage() {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/customers/pfp/${userId}`
+      );
+
+      setProfilePic(response.data[0].profile_pic);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div>
       <header className="msg_header">
@@ -130,11 +165,20 @@ function UserProfile() {
           <h1>Profile</h1>
         </div>
 
-        <div className="display_pic">
+        <div
+          className="display_pic"
+          onClick={() => fileInputRef.current && fileInputRef.current.click()}
+        >
           <img
             src={getProfilePic()}
             className="profile_pic_large"
             alt="user pfp"
+          />
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            onChange={handleImageChange}
           />
         </div>
       </header>

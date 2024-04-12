@@ -15,6 +15,7 @@ function BusinessProfile() {
     url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap')
   </style>;
   const [profilePic, setProfilePic] = useState("default-business.svg");
+  const [file, setFile] = useState(null);
   const userId = 2;
   const [businessData, setBusinessData] = useState({
     business_name: "",
@@ -24,6 +25,7 @@ function BusinessProfile() {
     address: "",
   });
   const [saveStatus, setSaveStatus] = useState("");
+  const [pause, setPause] = useState("");
 
   const navigate = useNavigate();
   const homeNavigate = () => {
@@ -63,6 +65,7 @@ function BusinessProfile() {
         if (response.data && response.data.length) {
           const data = response.data[0];
           setProfilePic(data.logo || "default-business.svg");
+          handleSetPause(data.account_status);
         }
       } catch (error) {
         console.error("Failed to fetch business data:", error);
@@ -71,6 +74,15 @@ function BusinessProfile() {
 
     fetchBusinessData();
   }, [userId]);
+
+  const handleSetPause = (status) => {
+    if (status === "paused") {
+      setPause("Unpause");
+    } else {
+      setPause("Pause");
+    }
+  };
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setBusinessData((prev) => ({ ...prev, [name]: value }));
@@ -105,15 +117,71 @@ function BusinessProfile() {
       await axios
         .post(`http://localhost:8080/restaurants/logo/${userId}`, formData)
         .then((response) => {
-          setProfilePic(response.data.path);
+          setFile(response.data.path);
           console.log("Profile picture updated successfully");
+          setImage();
+          setSaveStatus("Image changed successfully.");
         })
         .catch((error) => {
           console.error("Failed to update profile picture", error);
         });
     }
   }
+  async function setImage() {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/restaurants/logo/${userId}`
+      );
+
+      setProfilePic(response.data.logo);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const fileInputRef = useRef(null);
+
+  const handlePauseBusiness = async () => {
+    // unpaused
+    if (pause === "Pause") {
+      try {
+        const response = await axios.put(
+          `http://localhost:8080/restaurants/pause/${userId}`
+        );
+        handleSetPause(response.data.account_status);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        const response = await axios.put(
+          `http://localhost:8080/restaurants/resume/${userId}`
+        );
+        handleSetPause(response.data.account_status);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const handleDeleteBusiness = async () => {
+    // Confirmation dialog
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this business?"
+    );
+    if (confirmDelete) {
+      try {
+        // Perform the delete operation
+        const response = await axios.put(
+          `http://localhost:8080/restaurants/delete/${userId}`
+        );
+        console.log(response.data);
+        navigate("/businessHomepage");
+      } catch (error) {
+        console.error("Failed to delete the business:", error);
+        setSaveStatus("Failed to delete the business.");
+      }
+    }
+  };
 
   return (
     <div>
@@ -132,7 +200,6 @@ function BusinessProfile() {
             className="profile_pic_large"
             alt="business profile"
           />
-          <div className="profile_pic_overlay"></div>
           <input
             type="file"
             ref={fileInputRef}
@@ -210,10 +277,18 @@ function BusinessProfile() {
               <button className="save_changes" onClick={saveChanges}>
                 Save Changes
               </button>
-              <button className="pause_bus" type="button">
-                Pause Business
+              <button
+                className="pause_bus"
+                onClick={handlePauseBusiness}
+                type="button"
+              >
+                {pause} Business
               </button>
-              <button className="delete_bus" type="button">
+              <button
+                className="delete_bus"
+                onClick={handleDeleteBusiness}
+                type="button"
+              >
                 Delete Business
               </button>
               <button

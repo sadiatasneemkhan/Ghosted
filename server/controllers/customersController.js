@@ -194,3 +194,15 @@ export async function updateCustomerPicByUserId(profile_pic, user_id) {
     throw error;
   }
 }
+
+export async function getCustomerPicByUserId(user_id) {
+  try {
+    await pool.query(`SELECT profile_pic FROM customers WHERE user_id = ?`, [
+      user_id,
+    ]);
+    return getCustomerByUserId(user_id);
+  } catch (error) {
+    console.error(`Error getting customer profile pic`, error);
+    throw error;
+  }
+}
