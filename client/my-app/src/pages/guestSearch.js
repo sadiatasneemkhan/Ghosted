@@ -13,13 +13,13 @@ function GuestSearch() {
   const restaurantId = localStorage.getItem('1'); // Retrieve restaurant_id from localStorage
 
   useEffect(() => {
-  axios.get(`http://localhost:8080/menu_items/${menu_item_id}`)
-    .then(response => {
-      setMenuItem(response.data);
-    })
-    .catch(error => {
-      console.error('There was an error!', error);
-    });
+    axios.get(`http://localhost:8080/menu_items/${menu_item_id}`)
+      .then(response => {
+        setMenuItem(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      });
   }, [menu_item_id]);
 
 
@@ -45,24 +45,27 @@ function GuestSearch() {
 
   const addToCart = () => {
     if (menuItem) {
-      axios.post(`http://localhost:8080/menu_items/${menu_item_id}/add-to-cart`, {
+      axios.post(`http://localhost:8080/cart_items/`, {
         restaurant_id: restaurantId,
         name: menuItem.name,
         description: menuItem.description,
         price: menuItem.price,
         category_id: menuItem.category_id,
         image: menuItem.image,
-        quantity: count
       })
       .then(response => {
-        console.log(response);
-        userCartItems();
+        console.log('Item added to cart:', response.data);
+        // userCartItems();
       })
       .catch(error => {
-        console.error('There was an error!', error);
+        console.error('There was an error adding the item to the cart!', error);
       });
+    } else {
+      console.log('No menu item selected.');
     }
   };
+  
+  
 
   return (
     <div className="HomepageMainCon">

@@ -46,13 +46,13 @@ function UserSearch() {
   const addToCart = () => {
     if (menuItem) {
       axios.post(`http://localhost:8080/cart_items/`, {
-        cartId: 1, // Replace with the actual cart ID
-        itemId: 1, // Replace with the actual item ID
+        cartId: 1, 
+        itemId: 1,
         quantity: count
       })
       .then(response => {
         console.log('Item added to cart:', response.data);
-        userCartItems();
+        // userCartItems();
       })
       .catch(error => {
         console.error('There was an error adding the item to the cart!', error);

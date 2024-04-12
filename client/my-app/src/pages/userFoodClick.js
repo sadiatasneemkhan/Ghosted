@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function UserFoodClick() {
   const [menuItem, setMenuItem] = useState([]);
+  const [restaurant, setRestaurant] = useState(null); // Define state for restaurant
   const navigate = useNavigate();
 
   const userId = localStorage.getItem("user_id"); // Retrieve user_id from localStorage
@@ -23,16 +24,34 @@ function UserFoodClick() {
   const chatNavigate = () => {
     navigate("/userChat");
   };
+  
   const getImageUrl = (image) => {
     if (
       !image ||
       image.trim() === "" ||
       image === "./images/default-item-image"
     ) {
-      return "default-item.png"; // Path to default image, adjust if necessary
+      return "default-item.png";
     }
     return image;
   };
+
+  useEffect(() => {
+    const fetchRestaurant = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/restaurants/${restaurantId}`
+        );
+        console.log(response.data);
+        setRestaurant(response.data); // Set the restaurant data
+      } catch (error) {
+        console.error("Failed to fetch restaurant:", error);
+        setRestaurant(null);
+      }
+    };
+
+    fetchRestaurant();
+  }, [restaurantId]);
 
   useEffect(() => {
     const fetchMenuItems = async () => {
@@ -50,6 +69,7 @@ function UserFoodClick() {
 
     fetchMenuItems();
   }, [restaurantId]);
+
   const userMenuItems = (itemId) => {
     navigate(`/userSearch/${itemId}`);
   };
@@ -65,9 +85,17 @@ function UserFoodClick() {
         <h1 className="Home-title">Home</h1>
       </div>
       <div className="restaurant">
-        <img src="rest1.png" alt="Restaurant Image"></img>
-        <p className="restaurant-name">Restaurant 1</p>
-        <p className="address">Address</p>
+        {restaurant && ( // Check if restaurant data is available
+          <>
+            <img
+              src={"/rest1.png"}
+              class="restaraunt"
+              alt="image restaruant"
+            />
+            <p className="restaurant-name">{restaurant.business_name}</p>
+            <p className="address">{restaurant.address}</p>
+          </>
+        )}
       </div>
       <div className="scrollable-containerr">
         {menuItem.map((item) => (

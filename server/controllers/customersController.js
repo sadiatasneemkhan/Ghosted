@@ -14,7 +14,7 @@ export async function getCustomerByCustId(id) {
 
 export async function getCustomerId(user_id) {
   const [result] = await pool.query(
-    `SELECT resturant_id FROM customers WHERE user_id = ?`,
+    `SELECT restaurant_id FROM customers WHERE user_id = ?`,
     [user_id]
   );
   return result[0];

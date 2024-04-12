@@ -24,7 +24,7 @@ function Homepage() {
 
   const userId = "1";
 
-  useEffect(() => {
+  const fetchCartItems = () => {
     axios
       .get(`http://localhost:8080/cart/user/${userId}`) // Updated URL
       .then((response) => {
@@ -34,16 +34,19 @@ function Homepage() {
         console.error("There was an error!", error);
         setError(error);
       });
-  }, [cartItems]); // Added dependency
-  
-  
+  };
+
+  useEffect(() => {
+    fetchCartItems();
+  }, []); // Removed cartItems from dependencies
 
   const removeItem = (id) => {
     axios
-      .delete(`http://localhost:8080/cart_items/${id}`)
+      .delete(`http://localhost:8080/cart_items/${id}`, {
+        data: { orderId: userId } // Include orderId in the request body
+      })
       .then((response) => {
-        const updatedCartItems = cartItems.filter((item) => item.id !== id);
-        setCartItems(updatedCartItems);
+        fetchCartItems(); // Fetch cart items after successfully deleting an item
       })
       .catch((error) => {
         console.error("There was an error!", error);
@@ -59,7 +62,6 @@ function Homepage() {
   0; // Return 0 if cartItems is not an array
 
   console.log("Total Price:", totalPrice);
-
 
   return (
     <>

@@ -1,87 +1,98 @@
-import React from 'react';
-import './HomepageStyles.css';
-import './pages.css';
-import Navbar from '../components/Navbar';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import "./HomepageStyles.css";
+import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function GuestHomepage() {
+  const [restaurants, setRestaurants] = useState([]);
+  const [image, setImage] = useState();
+  const userId = 1; // hardcoded, get from localstorage later
+  const firstname = "John";
 
   const navigate = useNavigate();
 
-  const homeNavigate = () => {
-    navigate('/guestHomepage');
-  }
+  useEffect(() => {
+    getAllRestaurants();
+  }, [userId]);
 
-  const chatNavigate = () => {
-    navigate('/signupPersonal');
+  const getAllRestaurants = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/restaurants/`);
+      setRestaurants(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const settingNavigate = () => {
-    navigate('/signupPersonal');
-  }
+  const getLogoUrl = (logo) => {
+    if (!logo || logo.trim() === "" || logo === "./images/default-profile") {
+      return "default-item.png"; // Path to default image
+    }
+    return logo;
+  };
 
-  const foodClickNavigate = () => {
-    navigate('/guestFoodClick');
-  }
-  const welcomeNavigate = () => {
-    navigate('/welcome');
-  };
-  
-  const profileNavigate = () => {
-    navigate('/userProfile');
-  };
   return (
     <div className="HomepageMainCon">
-      <img src={'/logo.svg'} className="App-logo-small" alt="logo" />
+      <img src={"/logo.svg"} className="App-logo-small" alt="logo" />
       <h1 className="Home-title">Home</h1>
       <div className="UserContainer">
-        
+        <div className="UserDetails">
+          <img
+            src={"/Pfp.svg"}
+            className="Pfp"
+            alt="User profile picture"
+            onClick={() => navigate("/userProfile")}
+            style={{ cursor: "pointer" }}
+            draggable="false"
+          />
+          <h4 className="DisplayUserName">Welcome {firstname}!</h4>
+        </div>
       </div>
-      <div className="Search-Container">
-        <input type="text" className="SearchBar" placeholder=" Search" />
-      </div>
-      <div className="Restaurant-ScrollContainer2">
+      {/* <div className="Search-Container">
+        <input type="text" className="SearchBar" placeholder="Search" />
+      </div> */}
+      <div className="Restaurant-ScrollContainer">
         <div className="Restaurant-Container">
-          <div
-            class="Restaurant1"
-            data-name="Restaurant Name"
-            data-distance="2.4km"
-          >
-            <img onClick={foodClickNavigate} src="rest1.png" alt="Restaurant Image" style={{ cursor: 'pointer' }} draggable="false"/>
-          </div>
-          <div
-            class="Restaurant1"
-            data-name="Restaurant Name"
-            data-distance="2.4km"
-          >
-             <img onClick={foodClickNavigate} className="Restaurant-main-img" src="rest1.png" alt="Restaurant Image" style={{ cursor: 'pointer' }} draggable="false"/>
-          </div>
-          <div
-            class="Restaurant1"
-            data-name="Restaurant Name"
-            data-distance="2.4km"
-          >
-           <img onClick={foodClickNavigate} src="rest1.png" alt="Restaurant Image" style={{ cursor: 'pointer' }} draggable="false"/>
-          </div>
-          <div
-            class="Restaurant1"
-            data-name="Restaurant Name"
-            data-distance="2.4km"
-          >
-             <img onClick={foodClickNavigate} src="rest1.png" alt="Restaurant Image" style={{ cursor: 'pointer' }} draggable="false"/>
-          </div>
+          {restaurants.map((bus) => (
+            <div
+              key={bus.restaurant_id}
+              className="Restaurant1"
+              data-name={bus.business_name}
+              onClick={() => navigate(`/guestFoodClick/${bus.restaurant_id}`)}
+            >
+              <img
+                src={`http://localhost:8080/images/${getLogoUrl(bus.logo)}`}
+                alt="Restaurant Image"
+                style={{ cursor: "pointer" }}
+                draggable="false"
+              />
+            </div>
+          ))}
         </div>
       </div>
       <footer className="bottom_nav">
-        <a href="/welcome" onClick={welcomeNavigate}>
-          <img src={'/homeIconG.svg'} className="home_icon" alt="home icon" />
-        </a>
-        <a href="/userChat" onClick={chatNavigate}>
-          <img src={'/chatIconB.svg'} className="chat_icon" alt="chat icon" />
-        </a>
-        <a href="/userProfile" onClick={profileNavigate}>
-          <img src={'/settingIconB.svg'} className="setting_icon" alt="setting icon" />
-        </a>
+        <img
+          src={"/HomeIconB.svg"}
+          onClick={() => navigate("/welcome")}
+          className="home_icon"
+          alt="home icon"
+          style={{ cursor: "pointer" }}
+        />
+        <img
+          src={"/ChatIconG.svg"}
+          onClick={() => navigate("/userChat")}
+          className="chat_icon"
+          alt="chat icon"
+          style={{ cursor: "pointer" }}
+        />
+        <img
+          src={"/SettingIconG.svg"}
+          onClick={() => navigate("/userProfile")}
+          className="setting_icon"
+          alt="setting icon"
+          style={{ cursor: "pointer" }}
+        />
       </footer>
     </div>
   );

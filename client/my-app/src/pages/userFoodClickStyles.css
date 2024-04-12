@@ -15,8 +15,14 @@
 .restaurant img {
   border: 4px solid #5cb1e7;
   border-radius: 17px;
-  width: 410px;
+  width: 360px; 
   height: auto;
+}
+
+@media (min-width: 769px) {
+  .restaurant img {
+    width: 410px; 
+  } 
 }
 
 .restaurant-name {
@@ -64,7 +70,7 @@
 }
 .view-cart-btn {
   position: sticky;
-  bottom: 50px; /* Adjust as needed */
+  bottom: 0px; /* Adjust as needed */
   z-index: 2; /* Ensure it stays in front of other content */
   width: 297px;
   height: 43.7px;
