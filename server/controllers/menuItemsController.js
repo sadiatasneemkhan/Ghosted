@@ -79,35 +79,63 @@ export async function deleteMenuItem(menuItemId, restaurantId) {
   }
 }
 
-export async function updateMenuItem(
-  menuItemId,
-  name,
-  description,
-  price,
-  isAvailable,
-  categoryId,
-  image,
-  prepTime
-) {
+export async function updateMenuItem(menuItemId, fields) {
+  const { name, description, price, isAvailable, categoryId, image, prepTime } =
+    fields;
+
+  // Collect fields to update
+  const updates = [];
+  const values = [];
+
+  if (name !== undefined && name !== "") {
+    updates.push("name = ?");
+    values.push(name);
+  }
+  if (description !== undefined && description !== "") {
+    updates.push("description = ?");
+    values.push(description);
+  }
+  if (price !== undefined && price !== "") {
+    updates.push("price = ?");
+    values.push(price);
+  }
+  if (isAvailable !== undefined && isAvailable !== "") {
+    updates.push("is_available = ?");
+    values.push(isAvailable);
+  }
+  if (categoryId !== undefined && categoryId !== "") {
+    updates.push("category_id = ?");
+    values.push(categoryId);
+  }
+  if (image !== undefined && image !== "") {
+    updates.push("image = ?");
+    values.push(image);
+  }
+  if (prepTime !== undefined && prepTime !== "") {
+    updates.push("prep_time = ?");
+    values.push(prepTime);
+  }
+
+  // Make sure there are updates to be made
+  if (updates.length === 0) {
+    return { success: false, message: "No updates provided" };
+  }
+
+  // Build SQL query dynamically
+  const query = `UPDATE menu_items SET ${updates.join(
+    ", "
+  )} WHERE menu_item_id = ?`;
+  values.push(menuItemId);
+
   try {
-    const [result] = await pool.query(
-      `UPDATE menu_items SET name = ?, description = ?, price = ?, is_available = ?, category_id = ?, image = ?, prep_time = ?
-         WHERE menu_item_id = ?`,
-      [
-        name,
-        description,
-        price,
-        isAvailable,
-        categoryId,
-        image,
-        prepTime,
-        menuItemId,
-      ]
-    );
+    const [result] = await pool.query(query, values);
     if (result.affectedRows === 0) {
-      throw new Error("Menu item not found or data unchanged");
+      return {
+        success: false,
+        message: "Menu item not found or data unchanged",
+      };
     }
-    return { success: true };
+    return { success: true, message: "Menu item updated successfully" };
   } catch (error) {
     console.error("Error updating menu item:", error);
     throw new Error("Error updating menu item");
@@ -134,5 +162,30 @@ export async function toggleMenuItemAvailability(menuItemId) {
   } catch (error) {
     console.error("Error toggling menu item availability:", error);
     throw new Error("Error toggling menu item availability");
+  }
+}
+
+// image upload
+
+export async function updateMenuItemImgByRestaurantId(img, restaurant_id) {
+  try {
+    await pool.query(
+      `UPDATE menu_items SET image = ? WHERE restaurant_id = ?`,
+      [img, restaurant_id]
+    );
+  } catch (error) {
+    console.error(`Error updating menu_item image`, error);
+    throw error;
+  }
+}
+
+export async function getMenuItemImgByRestaurantId(restaurant_id) {
+  try {
+    await pool.query(`SELECT image FROM menu_items WHERE restaurant_id = ?`, [
+      restaurant_id,
+    ]);
+  } catch (error) {
+    console.error(`Error getting menu item pic`, error);
+    throw error;
   }
 }
