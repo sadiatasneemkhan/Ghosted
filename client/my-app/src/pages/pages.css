@@ -255,7 +255,7 @@
 /* CSS for desktop view Sign In */
 @media (min-width: 768px) {
 
-    .page2 {
+    .dkpage2 {
         width: 682px;
         height: 601px;
         border-radius: 30px;
