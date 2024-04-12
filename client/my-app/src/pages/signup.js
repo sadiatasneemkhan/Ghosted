@@ -1,13 +1,20 @@
 // import business from '../public/business.svg';
 // import personal from '../public/personal.svg';
 import './pages.css';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Route, Navigate, useNavigate } from 'react-router-dom';
 
 function Signup() {
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap')
   </style>
+
+  const [name, setName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [address, setAddress] = useState('');
 
   const navigate = useNavigate();
 
@@ -15,9 +22,36 @@ function Signup() {
     navigate('/signupPersonal');
   };
 
-  const signupNavigate = () => {
-    navigate('/verify')
-  }
+  const handleSignup = async () => {
+    
+    try {
+
+      const response = await axios.post('http://localhost:8080/restaurants', {
+        phone: phoneNumber,
+        email: email,
+        password: password,
+        first_name:"",
+        last_name: "",
+        business_name: name,
+        address: address,
+        city: "",
+        province: "",
+      });
+  
+      const loginData = response.data;
+      localStorage.setItem('user_id', loginData.user_id); // Store user_id in localStorage
+      verifyNavigate();
+
+    } catch (error) {
+      console.error('Error occurred during signup:', error);
+    }
+
+  };
+
+  //NOT WORKING!!
+  const verifyNavigate = () => {
+    navigate('/verify');
+  };
 
   return (
     <div className="page2">
@@ -33,38 +67,59 @@ function Signup() {
             <p>Business</p>
           </div>
         </div>
-
         <div className="page2_inputfields">
-          <div className="businessname">
-            <label for="businessname">BUSINESS NAME</label>
-            <input type="text" id="businessname" name="businessname"></input>
-          </div>
-          <div className="businessname">
-            <label for="phonenumber">PHONE NUMBER</label>
-            <input type="text" id="phonenumber" name="phonenumber"></input>
-          </div>
-          <div className="businessname">
-            <label for="businessemail">BUSINESS EMAIL</label>
-            <input
-              type="text"
-              id="businessemail"
-              name="businessemail"
-            ></input>
-          </div>
-          <div className="businessname">
-            <label for="password">PASSWORD</label>
-            <input type="text" id="password" name="password"></input>
-          </div>
-          <div className="businessname">
-            <label for="businessaddress">BUSINESS ADDRESS</label>
-            <input
-              type="text"
-              id="businessaddress"
-              name="businessaddress"
-            ></input>
-          </div>
+        <div className="businessname">
+          <label htmlFor="businessname">BUSINESS NAME</label>
+          <input
+            type="text"
+            id="businessname"
+            name="businessname"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
         </div>
-        <button onClick={signupNavigate} className="sign-up-button"> Sign up</button>
+        <div className="businessname">
+          <label htmlFor="phonenumber">PHONE NUMBER</label>
+          <input
+            type="text"
+            id="phonenumber"
+            name="phonenumber"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+        </div>
+        <div className="businessname">
+          <label htmlFor="businessemail">BUSINESS EMAIL</label>
+          <input
+            type="text"
+            id="businessemail"
+            name="businessemail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="businessname">
+          <label htmlFor="password">PASSWORD</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="businessname">
+          <label htmlFor="businessaddress">BUSINESS ADDRESS</label>
+          <input
+            type="text"
+            id="businessaddress"
+            name="businessaddress"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        </div>
+        </div>
+        <button onClick={handleSignup} className="sign-up-button"> Sign up</button>
         <div className="page2_account">
           <p>
             Already have an account? <a href="./signin">Sign In</a>
