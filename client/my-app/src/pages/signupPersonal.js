@@ -34,7 +34,7 @@ function SignupPersonal() {
   
       const loginData = response.data;
       localStorage.setItem('user_id', loginData.user_id); // Store user_id in localStorage
-      userHomepageNavigate();
+      signinNavigate();
 
     } catch (error) {
       console.error('Error occurred during signup:', error);
@@ -42,8 +42,8 @@ function SignupPersonal() {
 
   };
 
-   const userHomepageNavigate = () => {
-    navigate('/userHomepage');
+   const signinNavigate = () => {
+    navigate('/signin');
   };
 
   return (
