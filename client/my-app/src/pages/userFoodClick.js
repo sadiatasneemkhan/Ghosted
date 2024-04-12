@@ -79,7 +79,6 @@ function UserFoodClick() {
               key={item.id}
               src={`http://localhost:8080/images/${getImageUrl(item.image)}`}
               alt={item.name}
-              alt={item.name}
             />
           </div>
         ))}
