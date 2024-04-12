@@ -26,7 +26,7 @@ function Homepage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/cart/${userId}`)
+      .get(`http://localhost:8080/cart/user/${userId}`) // Updated URL
       .then((response) => {
         setCartItems(response.data);
       })
@@ -34,7 +34,9 @@ function Homepage() {
         console.error("There was an error!", error);
         setError(error);
       });
-  }, []);
+  }, [cartItems]); // Added dependency
+  
+  
 
   const removeItem = (id) => {
     axios
@@ -75,7 +77,8 @@ function Homepage() {
                   <div className="item-details">
                     <h3 className="food-name">{item.name}</h3>
                     <p className="quantity">Quantity: {item.quantity}</p>
-                    <p className="price">Price: ${item.price.toFixed(2)}</p>
+
+                    <p className="price">price: ${item.price ? item.price.toFixed(2) : 0}</p>
                   </div>
                   <button
                     className="remove-button"
