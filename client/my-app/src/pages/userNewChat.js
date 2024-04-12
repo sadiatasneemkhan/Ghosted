@@ -171,6 +171,26 @@ function UserNewChat() {
     navigate(-1); // Goes back a page
   };
 
+  function getBusinessLogoUrl(logo) {
+    const defaultLogo = "default-business.svg"; // Default business logo
+    if (!logo || logo.trim() === "" || logo === "./images/default-profile") {
+      return `http://localhost:8080/images/${defaultLogo}`;
+    }
+    return `http://localhost:8080/images/${logo}`;
+  }
+
+  function getUserProfilePicUrl(profilePic) {
+    const defaultProfilePic = "default-profile.svg"; // Default profile picture
+    if (
+      !profilePic ||
+      profilePic.trim() === "" ||
+      profilePic === "./images/default-profile"
+    ) {
+      return `http://localhost:8080/images/${defaultProfilePic}`;
+    }
+    return `http://localhost:8080/images/${profilePic}`;
+  }
+
   return (
     <div>
       <header className="new_msg_header">
@@ -191,9 +211,13 @@ function UserNewChat() {
         </div>
         <div className="business-pfp">
           <img
-            src={"/business-logo.svg"}
+            src={
+              userType === "restaurant"
+                ? getUserProfilePicUrl(recipient.profile_pic)
+                : getBusinessLogoUrl(recipient.logo)
+            }
             className="sender_pfp"
-            alt="business logo"
+            alt="profile"
           />
         </div>
       </header>

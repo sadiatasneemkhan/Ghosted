@@ -29,6 +29,14 @@ export async function getRestaurantByRestId(id) {
   return rows;
 }
 
+export async function updateRestaurantLogoById(url, id) {
+  const [rows] = await pool.query(
+    `UPDATE restaurants SET logo = ? WHERE user_id = ?`,
+    [url, id]
+  );
+  return rows;
+}
+
 export async function getRestaurantByUserId(id) {
   const [rows] = await pool.query(
     `SELECT R.user_id, R.account_status, R.first_name, R.last_name, R.business_name, R.address, R.city, R.province, R.logo, U.email, U.phone FROM restaurants AS R JOIN users AS U ON R.user_id = U.user_id WHERE R.user_id = ?`,

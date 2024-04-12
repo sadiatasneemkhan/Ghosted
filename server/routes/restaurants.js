@@ -1,6 +1,6 @@
 import express from "express";
-
-//import methods from controller
+import multer from "multer";
+//import methods from user controller
 import { createUser } from "../controllers/usersController.js";
 
 import {
@@ -15,9 +15,40 @@ import {
   deleteRestaurant,
   resumeRestaurant,
   getAllRestaurants,
+  updateRestaurantLogoById,
 } from "../controllers/restaurantsController.js";
 
 const router = express.Router();
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    return cb(null, "./images");
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage });
+
+router.post("/logo/:userId", upload.single("file"), async (req, res) => {
+  const userId = req.params.userId; // Corrected to use userId
+  console.log(req.body);
+  console.log(req.file);
+  if (!req.file) {
+    return res.status(400).send("No file uploaded.");
+  }
+  const url = req.file.filename;
+
+  try {
+    await updateRestaurantLogoById(url, userId);
+    const restaurant = await getRestaurantByUserId(userId);
+    res.send(restaurant);
+  } catch (error) {
+    console.error("Failed to update restaurant logo:", error);
+    res.status(500).send("Failed to update restaurant logo.");
+  }
+});
 
 router.get("/", async (req, res) => {
   const restaurants = await getAllRestaurants();

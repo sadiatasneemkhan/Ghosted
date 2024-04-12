@@ -346,6 +346,7 @@
     left: 50px;
 }
 
+
 .subheading p{
     position: absolute;
     top: 143px;
@@ -467,6 +468,9 @@ padding-right: 20px;
     height: 120px;
 }
 
+
+  
+
 .user_field_list{
     display: flex;
     flex-direction: column;
@@ -514,6 +518,7 @@ padding-right: 20px;
     color: #396989;
     margin-bottom: 7px;
 }
+
 
 .user_profile_buttons{
     display: flex;
@@ -662,3 +667,10 @@ padding-right: 20px;
     padding-top: 30px;
     width: 310px;
 }
+
+.save_status_message {
+    color: #4CAF50; /* Green color for successful messages */
+    font-size: 16px;
+    margin-top: 10px; /* Space above the message */
+    text-align: center; /* Center align the message */
+  }
