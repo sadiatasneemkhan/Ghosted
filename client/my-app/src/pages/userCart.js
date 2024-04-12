@@ -1,47 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './userCartStyles.css';
-import Navbar from '../components/Navbar';
-import DateSelector from '../components/DateSelector';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./userCartStyles.css";
+import Navbar from "../components/Navbar";
+import DateSelector from "../components/DateSelector";
+import { useNavigate } from "react-router-dom";
 function Homepage() {
   const [cartItems, setCartItems] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const homeNavigate = () => {
-    navigate('/userHomepage');
+    navigate("/userHomepage");
   };
 
   const chatNavigate = () => {
-    navigate('/userChat');
+    navigate("/userChat");
   };
 
   const settingNavigate = () => {
-    navigate('/userProfile');
-  }
-
+    navigate("/userProfile");
+  };
 
   useEffect(() => {
-    const userId = localStorage.getItem('user_id'); // Retrieve user_id from localStorage
+    const userId = localStorage.getItem("user_id"); // Retrieve user_id from localStorage
 
-    axios.get(`http://localhost:8080/cart/${userId}`) // Include user_id in the request
-      .then(response => {
+    axios
+      .get(`http://localhost:8080/cart/${userId}`) // Include user_id in the request
+      .then((response) => {
         setCartItems(response.data);
       })
-      .catch(error => {
-        console.error('There was an error!', error);
+      .catch((error) => {
+        console.error("There was an error!", error);
         setError(error);
       });
   }, []);
 
   const removeItem = (id) => {
-    axios.delete(`http://localhost:8080/cart_items/${id}`)
-      .then(response => {
+    axios
+      .delete(`http://localhost:8080/cart_items/${id}`)
+      .then((response) => {
         const updatedCartItems = cartItems.filter((item) => item.id !== id);
         setCartItems(updatedCartItems);
       })
-      .catch(error => {
-        console.error('There was an error!', error);
+      .catch((error) => {
+        console.error("There was an error!", error);
         setError(error);
       });
   };
@@ -52,7 +54,7 @@ function Homepage() {
     return (
       <>
         <div className="HomepageMainCon">
-          <img src={'/logo.svg'} className="App-logo-small" alt="logo" />
+          <img src={"/logo.svg"} className="App-logo-small" alt="logo" />
           <h1 className="Home-title">Home</h1>
           <div className="main-ctn">
             <span className="cart-label">Cart</span>
@@ -66,7 +68,10 @@ function Homepage() {
                     <p className="quantity">Quantity: {item.quantity}</p>
                     <p className="price">Price: ${item.price.toFixed(2)}</p>
                   </div>
-                  <button className="remove-button" onClick={() => removeItem(item.id)}>
+                  <button
+                    className="remove-button"
+                    onClick={() => removeItem(item.id)}
+                  >
                     Remove
                   </button>
                   <div className="line"></div>
@@ -80,25 +85,29 @@ function Homepage() {
                 <p className="selection-label">Select delivery date</p>
                 <DateSelector className="date-selector" />
               </div>
-              <div className='ins-ctn'>
-                <p className='ins-label'>Instructions</p>
-                <input className='ins-input' type='text'></input>
+              <div className="ins-ctn">
+                <p className="ins-label">Instructions</p>
+                <input className="ins-input" type="text"></input>
               </div>
-              <button className='place-order'>Place Order</button>
+              <button className="place-order">Place Order</button>
             </div>
           </div>
         </div>
         <footer className="bottom_nav">
-        <a href="/welcome" onClick={homeNavigate}>
-          <img src={'/homeIconB.svg'} className="home_icon" alt="home icon" />
-        </a>
-        <a href="/userChat" onClick={chatNavigate}>
-          <img src={'/chatIconG.svg'} className="chat_icon" alt="chat icon" />
-        </a>
-        <a href="/userProfile" onClick={settingNavigate}>
-          <img src={'/settingIconG.svg'} className="setting_icon" alt="setting icon" />
-        </a>
-      </footer>
+          <a href="/welcome" onClick={homeNavigate}>
+            <img src={"/homeIconB.svg"} className="home_icon" alt="home icon" />
+          </a>
+          <a href="/userChat" onClick={chatNavigate}>
+            <img src={"/chatIconG.svg"} className="chat_icon" alt="chat icon" />
+          </a>
+          <a href="/userProfile" onClick={settingNavigate}>
+            <img
+              src={"/settingIconG.svg"}
+              className="setting_icon"
+              alt="setting icon"
+            />
+          </a>
+        </footer>
       </>
     );
   }
