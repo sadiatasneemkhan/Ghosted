@@ -43,27 +43,27 @@ function GuestSearch() {
     }
   };
 
-  const addToCart = () => {
-    if (menuItem) {
-      axios.post(`http://localhost:8080/cart_items/`, {
-        restaurant_id: restaurantId,
-        name: menuItem.name,
-        description: menuItem.description,
-        price: menuItem.price,
-        category_id: menuItem.category_id,
-        image: menuItem.image,
-      })
-      .then(response => {
-        console.log('Item added to cart:', response.data);
-        // userCartItems();
-      })
-      .catch(error => {
-        console.error('There was an error adding the item to the cart!', error);
-      });
-    } else {
-      console.log('No menu item selected.');
-    }
-  };
+  // const addToCart = () => {
+  //   if (menuItem) {
+  //     axios.post(`http://localhost:8080/cart_items/`, {
+  //       restaurant_id: restaurantId,
+  //       name: menuItem.name,
+  //       description: menuItem.description,
+  //       price: menuItem.price,
+  //       category_id: menuItem.category_id,
+  //       image: menuItem.image,
+  //     })
+  //     .then(response => {
+  //       console.log('Item added to cart:', response.data);
+  //       // userCartItems();
+  //     })
+  //     .catch(error => {
+  //       console.error('There was an error adding the item to the cart!', error);
+  //     });
+  //   } else {
+  //     console.log('No menu item selected.');
+  //   }
+  // };
   
   
 
@@ -94,13 +94,13 @@ function GuestSearch() {
               <p className="price-label">Price</p>
               <p className="price-value">${price}</p>
             </div>
-            <div className="btn-ctn">
+            {/* <div className="btn-ctn">
               <button className="add-to-cart" onClick={addToCart}>Add to cart</button>
-            </div>
+            </div> */}
           </div>
-          <div className="view-cart-btn-ctn" onClick={userCartItems}>
+          {/* <div className="view-cart-btn-ctn" onClick={userCartItems}>
             <button className="view-cart">View cart</button>
-          </div>
+          </div> */}
         </div>
       )}
       <footer className="bottom_nav">

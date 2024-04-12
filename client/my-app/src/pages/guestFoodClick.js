@@ -71,12 +71,12 @@ function GuestFoodClick() {
   }, [restaurantId]);
 
   const userMenuItems = (itemId) => {
-    navigate(`/guestSearch/${itemId}`);
+    navigate(`/signup`);
   };
 
-  const userCartItems = () => {
-    navigate("/userCart");
-  };
+  // const userCartItems = () => {
+  //   navigate("/userCart");
+  // };
 
   return (
     <>
@@ -111,9 +111,9 @@ function GuestFoodClick() {
           </div>
         ))}
 
-        <button className="view-cart-btn" onClick={userCartItems}>
+        {/* <button className="view-cart-btn" onClick={userCartItems}>
           View cart
-        </button>
+        </button> */}
 
         <footer className="bottom_nav">
           <img
