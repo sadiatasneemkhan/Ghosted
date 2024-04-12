@@ -33,7 +33,7 @@ CREATE TABLE `customers` (
   `address` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `province` varchar(255) NOT NULL,
-  `profile_pic` varchar(255) DEFAULT './images/default-profile',
+  `profile_pic` varchar(255) DEFAULT 'default-profile.svg',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -52,7 +52,7 @@ CREATE TABLE `menu_items` (
   `price` decimal(10,2) NOT NULL,
   `is_available` BOOLEAN NOT NULL DEFAULT 1,
   `category_id` int NOT NULL,
-  `image` varchar(255) NOT NULL DEFAULT './images/default-item-image',
+  `image` varchar(255) NOT NULL DEFAULT 'default-item.png',
   `prep_time` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -138,7 +138,7 @@ CREATE TABLE `restaurants` (
   `address` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `province` varchar(255) NOT NULL,
-  `logo` varchar(255) NOT NULL DEFAULT './images/default-profile',
+  `logo` varchar(255) NOT NULL DEFAULT 'default-restaurant.svg',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

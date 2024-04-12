@@ -14,9 +14,15 @@ import {
   pauseRestaurant,
   deleteRestaurant,
   resumeRestaurant,
+  getAllRestaurants,
 } from "../controllers/restaurantsController.js";
 
 const router = express.Router();
+
+router.get("/", async (req, res) => {
+  const restaurants = await getAllRestaurants();
+  res.send(restaurants);
+});
 
 router.get("/:restaurant_id", async (req, res) => {
   const restaurant_id = req.params.restaurant_id;

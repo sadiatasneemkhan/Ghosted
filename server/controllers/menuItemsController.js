@@ -9,7 +9,8 @@ export async function getMenuItemByMenuItemId(id) {
 
 export async function getMenuItemsByRestaurantId(id) {
   const [rows] = await pool.query(
-    "SELECT menu_item_id, restaurant_id,name,description,price,is_available,category_id,image,prep_time FROM menu_items WHERE restaurant_id = ?"
+    "SELECT menu_item_id, restaurant_id,name,description,price,is_available,category_id,image,prep_time FROM menu_items WHERE restaurant_id = ? AND is_available = 1",
+    [id]
   );
   return rows;
 }

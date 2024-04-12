@@ -140,6 +140,13 @@ export async function deleteRestaurant(user_id) {
   }
 }
 
+export async function getAllRestaurants() {
+  const [rows] = await pool.query(
+    `SELECT restaurant_id, account_status, business_name, address, city, province, logo FROM restaurants WHERE account_status = 'approved'`
+  );
+  return rows;
+}
+
 // export async function updateRestaurantNameByUserId(business_name, user_id) {
 //   try {
 //     await pool.query(

@@ -36,7 +36,7 @@ function App() {
       <Route path="/businessProfile" element={<BusinessProfile />} />
       <Route path="/userHomepage" element={<UserHomepage />} />
       <Route path="/guestHomepage" element={<GuestHomepage />} />
-      <Route path="/userFoodClick" element={<UserFoodClick />} />
+      <Route path="/userFoodClick/:restaurantId" element={<UserFoodClick />} />
       <Route path="/guestFoodClick" element={<GuestFoodClick />} />
       <Route path="/userSearch" element={<UserSearch />} />
       <Route path="/guestSearch" element={<GuestSearch />} />
