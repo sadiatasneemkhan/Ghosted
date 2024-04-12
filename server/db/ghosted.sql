@@ -66,7 +66,7 @@ CREATE TABLE `messages` (
   `message_id` int NOT NULL,
   `sender_id` int NOT NULL,
   `receiver_id` int NOT NULL,
-  `content` varchar(255) NOT NULL,
+  `content` varchar(200) NOT NULL,
   `sent_at` timestamp NOT NULL DEFAULT current_timestamp(),
   -- status
   `message_status` varchar(50) NOT NULL
@@ -85,7 +85,7 @@ CREATE TABLE `orders` (
   `total` decimal(10,2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `due_at` datetime NOT NULL,
-  `status_id` int NOT NULL
+  `status_id` int NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -117,10 +117,10 @@ CREATE TABLE `order_statuses` (
 --
 
 INSERT INTO `order_statuses` (`order_status_id`, `order_status`) VALUES
-(1, 'approved'),
-(2, 'completed'),
+(1, 'pending'),
+(2, 'approved'),
 (3, 'denied'),
-(4, 'pending');
+(4, 'completed');
 
 -- --------------------------------------------------------
 
@@ -131,7 +131,7 @@ INSERT INTO `order_statuses` (`order_status_id`, `order_status`) VALUES
 CREATE TABLE `restaurants` (
   `restaurant_id` int NOT NULL,
   `user_id` int NOT NULL,
-  `account_status` enum('pending','approved') NOT NULL DEFAULT 'pending',
+  `account_status` enum('pending','approved', 'paused', 'deleted') NOT NULL DEFAULT 'pending',
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `business_name` varchar(255) NOT NULL,
@@ -154,7 +154,6 @@ CREATE TABLE `users` (
   `user_type_id` int NOT NULL,
   `phone` varchar(20) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -264,7 +263,6 @@ ALTER TABLE `order_statuses`
 --
 ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`restaurant_id`),
-  ADD UNIQUE KEY `account_status` (`account_status`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -272,7 +270,6 @@ ALTER TABLE `restaurants`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email` (`email`),
   ADD KEY `user_type_id` (`user_type_id`);
 
@@ -441,3 +438,6 @@ ALTER TABLE `cart_items`
     ADD CONSTRAINT `cart_items_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `menu_items` (`menu_item_id`); 
     
 COMMIT;
+
+
+

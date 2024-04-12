@@ -1,0 +1,72 @@
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 600px;
+    position: relative;
+
+  }
+  .message-content {
+    margin-bottom: 5px;
+  }
+  
+  .chat-bubble {
+    max-width: 60%;
+    margin-bottom: 10px;
+    padding: 10px;
+    padding-bottom: 8px; 
+    padding-top: 0px;
+    border-radius: 16px;
+    color: white;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    position: relative; 
+  }
+  
+  .user {
+    background-color: #5CB1E7; 
+    align-self: flex-end;
+    margin-right: 8px;
+  }
+  
+  .user::after {
+    content: '';
+  position: absolute;
+  bottom: -8px;
+  right: 0px; /* Adjust based on your SVG and preferences */
+  width: 20px; /* Match the size of your SVG */
+  height: 15px; /* Match the size of your SVG */
+  background-image: url('../../public/chat-bubble-tail.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  }
+  .other {
+    background-color: #e1e1ed; 
+    color: black;
+    align-self: flex-start;
+    margin-left: 8px;
+  }
+  .other::after {
+    content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0px; 
+  width: 20px; 
+  height: 15px; 
+  background-image: url('../../public/other-chat-bubble-tail.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  }
+  .other .timestamp {
+    display: block;
+    font-size: 0.75rem;
+    margin-top: 5px;
+    padding-bottom: 2px;
+  }
+  
+  .user .timestamp {
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 0.75rem;
+    margin-top: 5px;
+    padding-bottom: 2px;
+  }

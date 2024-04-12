@@ -5,8 +5,8 @@ import {
   createMessage,
   getAllCustomersByUserId,
   getAllRestaurantsByUserId,
-  getCustomerNameByUserId,
-  getBusinessNameByUserId,
+  getCustomerByUserId,
+  getBusinessByUserId,
 } from "../controllers/messagesController.js";
 
 const router = express.Router();
@@ -14,8 +14,8 @@ const router = express.Router();
 router.get("/convo_customer/:user_id", async (req, res) => {
   try {
     const user_id = req.params.user_id;
-    const reciever = await getCustomerNameByUserId;
-    res.send(reciever);
+    const receiver = await getCustomerByUserId(user_id);
+    res.send(receiver);
   } catch (error) {
     console.error;
     res.status(500).send("Failed to retrieve current conversing customer");
@@ -25,7 +25,7 @@ router.get("/convo_customer/:user_id", async (req, res) => {
 router.get("/convo_business/:user_id", async (req, res) => {
   try {
     const user_id = req.params.user_id;
-    const reciever = await getBusinessNameByUserId;
+    const reciever = await getBusinessByUserId(user_id);
     res.send(reciever);
   } catch (error) {
     console.error;
@@ -36,7 +36,7 @@ router.get("/convo_business/:user_id", async (req, res) => {
 router.get("/restaurants/:user_id", async (req, res) => {
   try {
     const user_id = req.params.user_id;
-    const recievers = await getAllRestaurantsByUserId;
+    const recievers = await getAllRestaurantsByUserId(user_id);
     res.send(recievers);
   } catch (error) {
     console.error;
@@ -47,11 +47,11 @@ router.get("/restaurants/:user_id", async (req, res) => {
 router.get("/customers/:user_id", async (req, res) => {
   try {
     const user_id = req.params.user_id;
-    const recievers = await getAllCustomersByUserId;
+    const recievers = await getAllCustomersByUserId(user_id);
     res.send(recievers);
   } catch (error) {
     console.error;
-    res.status(500).send("Failed to retrieve all conversing customers");
+    res.status(500).send(error);
   }
 });
 
