@@ -144,4 +144,5 @@ function SignupPersonal() {
   );
 }
 
+
 export default SignupPersonal;
