@@ -74,11 +74,10 @@ function UserFoodClick() {
           <div
             className="food-items"
             onClick={() => userMenuItems(item.menu_item_id)}
+            key={item.id}
           >
             <img
-              key={item.id}
               src={`http://localhost:8080/images/${getImageUrl(item.image)}`}
-              alt={item.name}
               alt={item.name}
             />
           </div>
