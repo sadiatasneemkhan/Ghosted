@@ -2,7 +2,8 @@ import pool from "../db.js";
 
 export async function getMenuItemByMenuItemId(id) {
   const [rows] = await pool.query(
-    "SELECT menu_item_id, restaurant_id,name,description,price,is_available,category_id,image,prep_time FROM menu_items WHERE menu_item_id = ?"
+    "SELECT menu_item_id, restaurant_id,name,description,price,is_available,category_id,image,prep_time FROM menu_items WHERE menu_item_id = ?",
+    [id]
   );
   return rows;
 }
