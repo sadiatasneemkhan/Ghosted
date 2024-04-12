@@ -1,29 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function SignupPersonal() {
-  const [customerData, setCustomerData] = useState(null);
+
+  const [fname, setFName] = useState('');
+  const [lname, setLName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [address, setAddress] = useState('');
+
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchCustomerData = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/customers/2'); 
-      } catch (error) {
-        console.error('Error fetching customer data:', error);
-      }
-    };
-
-    fetchCustomerData();
-  }, []);
 
   const businessNavigate = () => {
     navigate('/signup');
   };
 
-  const signinNavigate = () => {
-    navigate('/signin');
+  const handleSignup = async () => {
+    
+    try {
+
+      const response = await axios.post('http://localhost:8080/customers', {
+        phone: phoneNumber,
+        email: email,
+        password: password,
+        first_name: fname,
+        last_name: lname,
+        address: address,
+        city: "",
+        province: "",
+      });
+  
+      const loginData = response.data;
+      localStorage.setItem('user_id', loginData.user_id); // Store user_id in localStorage
+      userHomepageNavigate();
+
+    } catch (error) {
+      console.error('Error occurred during signup:', error);
+    }
+
+  };
+
+   const userHomepageNavigate = () => {
+    navigate('/userHomepage');
   };
 
   return (
@@ -47,28 +67,68 @@ function SignupPersonal() {
         </div>
 
         <div className="page2_inputfields">
-          <div className="businessname">
-            <label htmlFor="businessname">FULLNAME</label>
-            <input type="text" id="businessname" name="businessname" value={customerData ? `${customerData.first_name} ${customerData.last_name}` : ''} readOnly></input>
-          </div>
-          <div className="businessname">
-            <label htmlFor="phonenumber">PHONE NUMBER</label>
-            <input type="text" id="phonenumber" name="phonenumber" value={customerData ? customerData.phone : ''} readOnly></input>
-          </div>
-          <div className="businessname">
-            <label htmlFor="businessemail">EMAIL</label>
-            <input type="text" id="businessemail" name="businessemail" value={customerData ? customerData.email : ''} readOnly></input>
-          </div>
-          <div className="businessname">
-            <label htmlFor="password">PASSWORD</label>
-            <input type="text" id="password" name="password"></input>
-          </div>
-          <div className="businessname">
-            <label htmlFor="businessaddress">ADDRESS</label>
-            <input type="text" id="businessaddress" name="businessaddress" value={customerData ? `${customerData.address}, ${customerData.city}, ${customerData.province}` : ''} readOnly></input>
-          </div>
+        <div className="businessname">
+          <label htmlFor="businessname">FIRST NAME</label>
+          <input
+            type="text"
+            id="businessname"
+            name="businessname"
+            value={fname}
+            onChange={(e) => setFName(e.target.value)}
+          />
         </div>
-        <button onClick={signinNavigate} className="sign-up-button">
+        <div className="businessname">
+          <label htmlFor="businessname">LAST NAME</label>
+          <input
+            type="text"
+            id="businessname"
+            name="businessname"
+            value={lname}
+            onChange={(e) => setLName(e.target.value)}
+          />
+        </div>
+        <div className="businessname">
+          <label htmlFor="phonenumber">PHONE NUMBER</label>
+          <input
+            type="text"
+            id="phonenumber"
+            name="phonenumber"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+        </div>
+        <div className="businessname">
+          <label htmlFor="businessemail">EMAIL</label>
+          <input
+            type="text"
+            id="businessemail"
+            name="businessemail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="businessname">
+          <label htmlFor="password">PASSWORD</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="businessname">
+          <label htmlFor="businessaddress">ADDRESS</label>
+          <input
+            type="text"
+            id="businessaddress"
+            name="businessaddress"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        </div>
+        </div>
+        <button onClick={handleSignup} className="sign-up-button">
           Sign up
         </button>
         <div className="page2_account">
