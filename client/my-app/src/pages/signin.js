@@ -24,11 +24,19 @@ function Signin() {
   
       const loginData = response.data;
   
-    if (loginData.message !== "User Not Found" && loginData.message !== "Incorrect Password" && loginData.length) {
-      setMessage('Login successful!');
-      localStorage.setItem('user_id', loginData.user_id); // Store user_id in localStorage
-      handleloginandHomepage();
-    }
+      if (loginData.message !== "User Not Found" && loginData.message !== "Incorrect Password" && loginData.length) {
+
+        const restaurantResponse = await axios.get(`http://localhost:8080/restaurants/${loginData.user_id}`);
+        const restaurantData = restaurantResponse.data;
+  
+        if (restaurantData.account_status === 'pending') {
+          setMessage('Your account is still pending. Please wait for approval.');
+        } else {
+          setMessage('Login successful!');
+          localStorage.setItem('user_id', loginData.user_id); // Store user_id in localStorage
+          handleloginandHomepage();
+        }
+      }
     } catch (error) {
       console.error('Error occurred during login:', error);
       setMessage('An error occurred during login. Please try again later.');
