@@ -49,6 +49,16 @@ function Homepage() {
       });
   };
 
+  // Calculate total price
+  const totalPrice = Array.isArray(cartItems) ? 
+  cartItems.reduce((total, item) => {
+    return total + item.price;
+  }, 0).toFixed(2) :
+  0; // Return 0 if cartItems is not an array
+
+  console.log("Total Price:", totalPrice);
+
+
   return (
     <>
       <div className="HomepageMainCon">
@@ -82,7 +92,7 @@ function Homepage() {
           </div>
           <hr />
           <div className="second-ctn">
-            <p className="total-price">Total Price: $44.29</p>
+            <p className="total-price">Total Price: ${totalPrice}</p> {/* Display total price */}
             <div className="date-ctn">
               <p className="selection-label">Select delivery date</p>
               <DateSelector className="date-selector" />
