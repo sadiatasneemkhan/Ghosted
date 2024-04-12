@@ -1,41 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Make sure to install this package
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 import './userSearchStyles.css';
-import Navbar from '../components/Navbar';
-import { useNavigate } from 'react-router-dom';
 
-function Homepage() {
+function UserSearch() {
   const navigate = useNavigate();
-  const [menuItem, setMenuItem] = useState([]);
+  const { menu_item_id } = useParams();
+  const [menuItem, setMenuItem] = useState(null);
   const [count, setCount] = useState(0);
+  const restaurantId = localStorage.getItem(1); // Retrieve restaurant_id from localStorage
 
   useEffect(() => {
-
-    axios.get('http://localhost:8080/menu_items')
+    axios.get(`http://localhost:8080/menu_items/1`)
       .then(response => {
         setMenuItem(response.data);
       })
       .catch(error => {
         console.error('There was an error!', error);
       });
-  }, []);
+  }, [menu_item_id]);
 
-  const userMenuItems = () => {
-    navigate('/userSearch');
-  };
   const userCartItems = () => {
     navigate('/userCart');
   };
-  const homeNavigate = () => {
-    navigate('/userHomepage');
-  };
-  const chatNavigate = () => {
-    navigate('/userChat');
-  };
-  const settingNavigate = () => {
-    navigate('/userProfile');
-  }
-
 
   const increment = () => {
     setCount(count + 1);
@@ -48,75 +35,69 @@ function Homepage() {
   };
 
   const addToCart = () => {
-    const userId = localStorage.getItem('user_id'); // Retrieve user_id from localStorage
-  
-    axios.post('http://localhost:8080/cart', {
-      itemId: menuItem.id,
-      quantity: count,
-      user_id: userId
-    })
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.error('There was an error!', error);
-    });
+    if (menuItem) {
+      axios.post(`http://localhost:8080/menu_items/1/add-to-cart`, {
+        restaurant_id: restaurantId,
+        name: menuItem.name,
+        description: menuItem.description,
+        price: menuItem.price,
+        category_id: menuItem.category_id,
+        image: menuItem.image,
+        quantity: count
+      })
+      .then(response => {
+        console.log(response);
+        userCartItems();
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      });
+    }
   };
-  
 
   return (
     <div className="HomepageMainCon">
-      <img src={'/logo.svg'} class="App-logo-small" alt="logo" />
-      <h1 class="Home-title">Home</h1>
-      <div className="main-ctn">
-        <div className="food-stuff">
-          <img src="/specificfood.png"></img>
-          <p className="food-name">{menuItem.name}</p>
-        </div>
-        <div className="description-ctn">
-          <p className="description-label">Description</p>
-          <div className="description-box">{menuItem.description}</div>
-        </div>
-        <div className="price-qty">
-          <div className="qty">
-            <p className="qty-label">Quantity</p>
-            <div className="counter">
-              <button className="decrement" onClick={decrement}>
-                -
-              </button>
-              <span className="count">{count}</span>
-              <button className="increment" onClick={increment}>
-                +
-              </button>
+      <img src={'/logo.svg'} className="App-logo-small" alt="logo" />
+      <h1 className="Home-title">Home</h1>
+      {menuItem && (
+        <div className="main-ctn">
+          <div className="food-stuff">
+            <img src={menuItem.image} alt={menuItem.name} />
+            <p className="food-name">{menuItem.name}</p>
+          </div>
+          <div className="description-ctn">
+            <p className="description-label">Description</p>
+            <div className="description-box">{menuItem.description}</div>
+          </div>
+          <div className="price-qty">
+            <div className="qty">
+              <p className="qty-label">Quantity</p>
+              <div className="counter">
+                <button className="decrement" onClick={decrement}>-</button>
+                <span className="count">{count}</span>
+                <button className="increment" onClick={increment}>+</button>
+              </div>
+            </div>
+            <div className="price">
+              <p className="price-label">Price</p>
+              <p className="price-value">${(menuItem.price * count).toFixed(2)}</p>
+            </div>
+            <div className="btn-ctn">
+              <button className="add-to-cart" onClick={addToCart}>Add to cart</button>
             </div>
           </div>
-          <div className="price">
-            <p className="price-label">Price</p>
-            <p className="price-value">${(menuItem.price * count).toFixed(2)}</p>
-          </div>
-
-        <div className="btn-ctn">
-          <button className="add-to-cart" onClick={addToCart}>Add to cart</button>
-        </div>
-      
           <div className="view-cart-btn-ctn" onClick={userCartItems}>
             <button className="view-cart">View cart</button>
+          </div>
         </div>
-        </div>
-        <div className="view-cart-btn-ctn" onClick={userCartItems}>
-          <button className="view-cart">View cart</button>
-        </div>
-      </div>
-        <div className="view-cart-btn-ctn" onClick={userCartItems}>
-          <button className="view-cart">View cart</button>
-        </div>
-        <footer className="bottom_nav">
-          <img src={'/HomeIconB.svg'} onClick={homeNavigate} className="home_icon" alt="home icon" style={{ cursor: 'pointer' }} />
-          <img src={'/ChatIconG.svg'} onClick={chatNavigate} className="chat_icon" alt="chat icon" style={{ cursor: 'pointer' }} />
-          <img src={'/SettingIconG.svg'} onClick={settingNavigate} className="setiing_icon" alt="setting icon" style={{ cursor: 'pointer' }} />
-        </footer>
+      )}
+      <footer className="bottom_nav">
+        <img src={'/HomeIconB.svg'} onClick={() => navigate('/userHomepage')} className="home_icon" alt="home icon" style={{ cursor: 'pointer' }} />
+        <img src={'/ChatIconG.svg'} onClick={() => navigate('/userChat')} className="chat_icon" alt="chat icon" style={{ cursor: 'pointer' }} />
+        <img src={'/SettingIconG.svg'} onClick={() => navigate('/userProfile')} className="setting_icon" alt="setting icon" style={{ cursor: 'pointer' }} />
+      </footer>
     </div>
   );
 }
 
-export default Homepage;
+export default UserSearch;
