@@ -44,7 +44,7 @@ function App() {
       <Route path="/userSearch/:menu_item_id" element={<UserSearch />} />
 
       <Route path="/guestSearch/:menu_item_id" element={<GuestSearch />} />
-      <Route path="/userCart/:restaurant_id" element={<UserCart />} />
+      <Route path="/userCart/:cart_id" element={<UserCart />} />
       <Route path="/userNewChat/:recieverId" element={<UserNewChat />} />
       <Route path="/businessHomepage" element={<BusinessHomePage />} />
       <Route path="/businessEdit/:itemId" element={<BusinessEdit />} />

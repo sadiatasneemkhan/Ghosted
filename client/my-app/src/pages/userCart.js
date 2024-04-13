@@ -9,6 +9,8 @@ function Homepage() {
   const [cartItems, setCartItems] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const splitted = window.location.pathname.split("/");
+  const cart_id = splitted[2];
 
   const homeNavigate = () => {
     navigate("/userHomepage");
@@ -26,9 +28,10 @@ function Homepage() {
 
   const fetchCartItems = () => {
     axios
-      .get(`http://localhost:8080/cart/user/${userId}`) // Updated URL
+      .get(`http://localhost:8080/cart_items/cart/${cart_id}`) // Updated URL
       .then((response) => {
         setCartItems(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("There was an error!", error);
@@ -40,10 +43,11 @@ function Homepage() {
     fetchCartItems();
   }, []); // Removed cartItems from dependencies
 
-  const removeItem = (id) => {
-    axios
-      .delete(`http://localhost:8080/cart_items/${id}`, {
-        data: { orderId: userId }, // Include orderId in the request body
+  const removeItem = async (id) => {
+    console.log(id);
+    await axios
+      .delete(`http://localhost:8080/cart_items/`, {
+        data: { cartId: cart_id, cartItemId: id }, // Include orderId in the request body
       })
       .then((response) => {
         fetchCartItems(); // Fetch cart items after successfully deleting an item
@@ -55,15 +59,12 @@ function Homepage() {
   };
 
   // Calculate total price
-  const totalPrice = Array.isArray(cartItems)
-    ? cartItems
-        .reduce((total, item) => {
-          return total + item.price;
-        }, 0)
-        .toFixed(2)
-    : 0; // Return 0 if cartItems is not an array
-
-  console.log("Total Price:", totalPrice);
+  const totalPrice = cartItems
+    .reduce((total, item) => {
+      return total + item.price * item.quantity;
+    }, 0)
+    .toFixed(2);
+  console.log("Total Price:", 0);
 
   return (
     <>
@@ -82,13 +83,11 @@ function Homepage() {
                     <h3 className="food-name">{item.name}</h3>
                     <p className="quantity">Quantity: {item.quantity}</p>
 
-                    <p className="price">
-                      price: ${item.price ? item.price.toFixed(2) : 0}
-                    </p>
+                    <p className="price">price: ${item.price}</p>
                   </div>
                   <button
                     className="remove-button"
-                    onClick={() => removeItem(item.id)}
+                    onClick={() => removeItem(item.item_id)}
                   >
                     Remove
                   </button>
