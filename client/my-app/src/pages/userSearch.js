@@ -48,7 +48,7 @@ function UserSearch() {
   }, [count, menuItem]);
 
   const userCartItems = () => {
-    navigate(`/userCart/${restaurantId}`);
+    navigate(`/userCart/${cartId}`);
   };
 
   const increment = () => {
