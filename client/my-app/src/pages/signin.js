@@ -52,7 +52,7 @@ function Signin() {
   
 
   return (
-    <div className="page2">
+    <div className="page2 dkpage2">
       <header className="page2_signup">
         <div className="page2_signin">
           <h1>Sign in</h1>
