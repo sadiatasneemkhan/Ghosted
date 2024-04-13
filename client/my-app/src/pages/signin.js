@@ -52,7 +52,7 @@ function Signin() {
   
 
   return (
-    <div className="page2">
+    <div className="page2 dkpage2">
       <header className="page2_signup">
         <div className="page2_signin">
           <h1>Sign in</h1>
@@ -64,7 +64,7 @@ function Signin() {
         </div>
         <div className="page2_inputfields">
           <div className="businessname">
-            <label htmlFor="email">EMAIL</label>
+            <label htmlFor="email" id='email1'>EMAIL</label>
             <input
               type="text"
               id="email"
@@ -74,7 +74,7 @@ function Signin() {
             />
           </div>
           <div className="businessname">
-            <label htmlFor="password">PASSWORD</label>
+            <label htmlFor="password" id='pass1'>PASSWORD</label>
             <input
               type="password"
               id="password"
