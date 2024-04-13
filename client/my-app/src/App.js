@@ -37,9 +37,13 @@ function App() {
       <Route path="/userHomepage" element={<UserHomepage />} />
       <Route path="/guestHomepage" element={<GuestHomepage />} />
       <Route path="/userFoodClick/:restaurantId" element={<UserFoodClick />} />
-      <Route path="/guestFoodClick" element={<GuestFoodClick />} />
-      <Route path="/userSearch/:itemId" element={<UserSearch />} />
-      <Route path="/guestSearch" element={<GuestSearch />} />
+      <Route
+        path="/guestFoodClick/:restaurantId"
+        element={<GuestFoodClick />}
+      />
+      <Route path="/userSearch/:menu_item_id" element={<UserSearch />} />
+
+      <Route path="/guestSearch/:menu_item_id" element={<GuestSearch />} />
       <Route path="/userCart" element={<UserCart />} />
       <Route path="/userNewChat/:recieverId" element={<UserNewChat />} />
       <Route path="/businessHomepage" element={<BusinessHomePage />} />

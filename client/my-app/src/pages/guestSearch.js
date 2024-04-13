@@ -5,14 +5,15 @@ import './userSearchStyles.css';
 
 function GuestSearch() {
   const navigate = useNavigate();
-  const { menu_item_id } = useParams();
+  const { menu_item_id } = useParams(); 
   const [menuItem, setMenuItem] = useState(null);
   const [count, setCount] = useState(0);
   const [price, setPrice] = useState(0);
-  const restaurantId = localStorage.getItem(1); // Retrieve restaurant_id from localStorage
+  
+  const restaurantId = localStorage.getItem('1'); // Retrieve restaurant_id from localStorage
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/menu_items/:menu_item_id`)
+    axios.get(`http://localhost:8080/menu_items/${menu_item_id}`)
       .then(response => {
         setMenuItem(response.data);
       })
@@ -20,6 +21,7 @@ function GuestSearch() {
         console.error('There was an error!', error);
       });
   }, [menu_item_id]);
+
 
   useEffect(() => {
     if (menuItem) {
@@ -41,26 +43,29 @@ function GuestSearch() {
     }
   };
 
-  const addToCart = () => {
-    if (menuItem) {
-      axios.post(`http://localhost:8080/menu_items/:menu_item_id/add-to-cart`, {
-        restaurant_id: restaurantId,
-        name: menuItem.name,
-        description: menuItem.description,
-        price: menuItem.price,
-        category_id: menuItem.category_id,
-        image: menuItem.image,
-        quantity: count
-      })
-      .then(response => {
-        console.log(response);
-        userCartItems();
-      })
-      .catch(error => {
-        console.error('There was an error!', error);
-      });
-    }
-  };
+  // const addToCart = () => {
+  //   if (menuItem) {
+  //     axios.post(`http://localhost:8080/cart_items/`, {
+  //       restaurant_id: restaurantId,
+  //       name: menuItem.name,
+  //       description: menuItem.description,
+  //       price: menuItem.price,
+  //       category_id: menuItem.category_id,
+  //       image: menuItem.image,
+  //     })
+  //     .then(response => {
+  //       console.log('Item added to cart:', response.data);
+  //       // userCartItems();
+  //     })
+  //     .catch(error => {
+  //       console.error('There was an error adding the item to the cart!', error);
+  //     });
+  //   } else {
+  //     console.log('No menu item selected.');
+  //   }
+  // };
+  
+  
 
   return (
     <div className="HomepageMainCon">
@@ -89,13 +94,13 @@ function GuestSearch() {
               <p className="price-label">Price</p>
               <p className="price-value">${price}</p>
             </div>
-            <div className="btn-ctn">
+            {/* <div className="btn-ctn">
               <button className="add-to-cart" onClick={addToCart}>Add to cart</button>
-            </div>
+            </div> */}
           </div>
-          <div className="view-cart-btn-ctn" onClick={userCartItems}>
+          {/* <div className="view-cart-btn-ctn" onClick={userCartItems}>
             <button className="view-cart">View cart</button>
-          </div>
+          </div> */}
         </div>
       )}
       <footer className="bottom_nav">

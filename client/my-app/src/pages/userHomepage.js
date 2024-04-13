@@ -49,9 +49,9 @@ function UserHomepage() {
           <h4 className="DisplayUserName">Welcome {firstname}!</h4>
         </div>
       </div>
-      <div className="Search-Container">
+      {/* <div className="Search-Container">
         <input type="text" className="SearchBar" placeholder="Search" />
-      </div>
+      </div> */}
       <div className="Restaurant-ScrollContainer">
         <div className="Restaurant-Container">
           {restaurants.map((bus) => (

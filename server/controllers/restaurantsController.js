@@ -14,19 +14,18 @@ export async function getRestaurantStatusByUserId(id) {
 
 export async function getRestaurantId(user_id) {
   const [result] = await pool.query(
-    `SELECT resturant_id FROM restaurants WHERE user_id = ?`,
+    `SELECT restaurant_id FROM restaurants WHERE user_id = ?`,
     [user_id]
   );
   return result[0];
 }
 
-//Prepared statement
 export async function getRestaurantByRestId(id) {
   const [rows] = await pool.query(
     `SELECT R.user_id, R.account_status, R.first_name, R.last_name, R.business_name, R.address, R.city, R.province, R.logo, U.email, U.phone FROM restaurants AS R JOIN users AS U ON R.user_id = U.user_id WHERE R.restaurant_id = ?`,
     [id]
   );
-  return rows;
+  return rows[0]; // Selecting the first row as there should be only one restaurant with the given ID
 }
 
 export async function getRestaurantLogoById(id) {
@@ -51,8 +50,9 @@ export async function getRestaurantByUserId(id) {
     `SELECT R.user_id, R.restaurant_id, R.account_status, R.first_name, R.last_name, R.business_name, R.address, R.city, R.province, R.logo, U.email, U.phone FROM restaurants AS R JOIN users AS U ON R.user_id = U.user_id WHERE R.user_id = ?`,
     [id]
   );
-  return rows;
+  return rows[0]; // Selecting the first row as there should be only one restaurant with the given user ID
 }
+
 
 export async function getRestaurantUserId(id) {
   const [rows] = await pool.query(

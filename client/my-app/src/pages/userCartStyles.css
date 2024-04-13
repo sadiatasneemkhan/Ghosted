@@ -1,12 +1,12 @@
 .main-ctn {
   width: 370px;
-  height: 300px;
+  height: 555px;
   padding: 0;
   text-align: center;
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
 }
 
 .cart-label {
