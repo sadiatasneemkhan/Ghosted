@@ -64,7 +64,7 @@ function Signin() {
         </div>
         <div className="page2_inputfields">
           <div className="businessname">
-            <label htmlFor="email" id='email1'>EMAIL</label>
+            <label htmlFor="email">EMAIL</label>
             <input
               type="text"
               id="email"
@@ -74,7 +74,7 @@ function Signin() {
             />
           </div>
           <div className="businessname">
-            <label htmlFor="password" id='pass1'>PASSWORD</label>
+            <label htmlFor="password">PASSWORD</label>
             <input
               type="password"
               id="password"
