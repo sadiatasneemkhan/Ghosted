@@ -43,7 +43,7 @@ function Homepage() {
   const removeItem = (id) => {
     axios
       .delete(`http://localhost:8080/cart_items/${id}`, {
-        data: { orderId: userId } // Include orderId in the request body
+        data: { orderId: userId }, // Include orderId in the request body
       })
       .then((response) => {
         fetchCartItems(); // Fetch cart items after successfully deleting an item
@@ -55,11 +55,13 @@ function Homepage() {
   };
 
   // Calculate total price
-  const totalPrice = Array.isArray(cartItems) ? 
-  cartItems.reduce((total, item) => {
-    return total + item.price;
-  }, 0).toFixed(2) :
-  0; // Return 0 if cartItems is not an array
+  const totalPrice = Array.isArray(cartItems)
+    ? cartItems
+        .reduce((total, item) => {
+          return total + item.price;
+        }, 0)
+        .toFixed(2)
+    : 0; // Return 0 if cartItems is not an array
 
   console.log("Total Price:", totalPrice);
 
@@ -80,7 +82,9 @@ function Homepage() {
                     <h3 className="food-name">{item.name}</h3>
                     <p className="quantity">Quantity: {item.quantity}</p>
 
-                    <p className="price">price: ${item.price ? item.price.toFixed(2) : 0}</p>
+                    <p className="price">
+                      price: ${item.price ? item.price.toFixed(2) : 0}
+                    </p>
                   </div>
                   <button
                     className="remove-button"
@@ -97,7 +101,8 @@ function Homepage() {
           </div>
           <hr />
           <div className="second-ctn">
-            <p className="total-price">Total Price: ${totalPrice}</p> {/* Display total price */}
+            <p className="total-price">Total Price: ${totalPrice}</p>{" "}
+            {/* Display total price */}
             <div className="date-ctn">
               <p className="selection-label">Select delivery date</p>
               <DateSelector className="date-selector" />
