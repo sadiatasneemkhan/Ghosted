@@ -7,7 +7,10 @@ import axios from "axios";
 function UserHomepage() {
   const [restaurants, setRestaurants] = useState([]);
   const [image, setImage] = useState();
-  const userId = 1; // hardcoded, get from localstorage later
+  localStorage.clear();
+  const userId = localStorage.getItem("user_id");
+  console.log(userId); 
+
   const firstname = "John";
 
   const navigate = useNavigate();
@@ -49,9 +52,7 @@ function UserHomepage() {
           <h4 className="DisplayUserName">Welcome {firstname}!</h4>
         </div>
       </div>
-      {/* <div className="Search-Container">
-        <input type="text" className="SearchBar" placeholder="Search" />
-      </div> */}
+    
       <div className="Restaurant-ScrollContainer">
         <div className="Restaurant-Container">
           {restaurants.map((bus) => (

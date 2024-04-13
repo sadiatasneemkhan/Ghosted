@@ -8,10 +8,10 @@ function UserFoodClick() {
   const [menuItem, setMenuItem] = useState([]);
   const [restaurant, setRestaurant] = useState(null); // Define state for restaurant
   const navigate = useNavigate();
-
-  const userId = localStorage.getItem("user_id"); // Retrieve user_id from localStorage
   const splitted = window.location.pathname.split("/");
   const restaurantId = splitted[2];
+  const userId = localStorage.getItem("user_id");
+  console.log(userId); 
 
   const homeNavigate = () => {
     navigate("/userHomepage");

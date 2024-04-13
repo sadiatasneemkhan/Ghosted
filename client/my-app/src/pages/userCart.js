@@ -11,6 +11,8 @@ function Homepage() {
   const navigate = useNavigate();
   const splitted = window.location.pathname.split("/");
   const cart_id = splitted[2];
+  const userId = localStorage.getItem("user_id");
+  console.log(userId); 
 
   const homeNavigate = () => {
     navigate("/userHomepage");
@@ -23,8 +25,6 @@ function Homepage() {
   const settingNavigate = () => {
     navigate("/userProfile");
   };
-
-  const userId = "1";
 
   const fetchCartItems = () => {
     axios

@@ -11,9 +11,9 @@ function UserSearch() {
   const [count, setCount] = useState(0);
   const [price, setPrice] = useState(0);
   const [cartId, setCartId] = useState(0);
-  // const restaurantId = localStorage.getItem(1); // Retrieve restaurant_id from localStorage
-  const userId = 1; //hardcoded for now
   const [restaurantId, setRestaurantId] = useState(0);
+  const userId = localStorage.getItem("user_id");
+  console.log(userId); 
 
   useEffect(() => {
     axios

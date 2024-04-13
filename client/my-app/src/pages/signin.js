@@ -9,6 +9,7 @@ function Signin() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [userID, setUserID] = useState('');
+
   
   const navigate = useNavigate();
 
@@ -35,8 +36,14 @@ function Signin() {
           setMessage('Your account is still pending. Please wait for approval.');
         } else {
           setMessage('Login successful!');
-          localStorage.setItem('user_id', loginData.user_id); // Store user_id in localStorage
+          console.log("loginData:", loginData);
+
+          console.log(loginData[0].user_id);
+          localStorage.setItem('user_id', loginData[0].user_id); // Store user_id in localStorage
+ 
+          
           handleloginandHomepage();
+
         }
       }
     } catch (error) {
