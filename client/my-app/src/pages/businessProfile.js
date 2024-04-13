@@ -16,7 +16,8 @@ function BusinessProfile() {
   </style>;
   const [profilePic, setProfilePic] = useState("default-business.svg");
   const [file, setFile] = useState(null);
-  const userId = 2;
+  const userId = localStorage.getItem("user_id");
+  console.log(userId); 
   const [businessData, setBusinessData] = useState({
     business_name: "",
     phone: "",

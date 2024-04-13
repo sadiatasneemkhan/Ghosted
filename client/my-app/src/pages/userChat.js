@@ -6,10 +6,11 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 function UserChat() {
-  const userId = 1; // HARDCODED: Replace with dynamic user ID from auth state or similar
   const firstName = "John";
   const navigate = useNavigate();
   const [restaurants, setRestaurants] = useState([]);
+  const userId = localStorage.getItem("user_id");
+  console.log(userId); 
 
   useEffect(() => {
     const fetchBusinessChats = async () => {

@@ -5,7 +5,8 @@ import moment from "moment";
 import { useNavigate } from "react-router-dom";
 
 function BusinessChat() {
-  const userId = 2; // HARDCODED: Replace with dynamic user ID from auth state or similar
+  const userId = localStorage.getItem("user_id");
+  console.log(userId); 
   const navigate = useNavigate();
   const [business, setBusiness] = useState(null);
   const [customers, setCustomers] = useState([]);

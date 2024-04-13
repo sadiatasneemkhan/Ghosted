@@ -11,8 +11,9 @@ function UserProfile() {
   </style>;
 
   const [profilePic, setProfilePic] = useState("default-profile.svg");
-  const userId = 5;
   const [file, setFile] = useState(null);
+  const userId = localStorage.getItem("user_id");
+  console.log(userId); 
 
   const [userData, setUserData] = useState({
     first_name: "",

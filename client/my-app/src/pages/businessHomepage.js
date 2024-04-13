@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function BusinessHomePage() {
-  const userId = 4;
   const restaurantId = 2;
   const navigate = useNavigate();
+  const userId = localStorage.getItem("user_id");
+  console.log(userId); 
 
   const [business, setBusiness] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
