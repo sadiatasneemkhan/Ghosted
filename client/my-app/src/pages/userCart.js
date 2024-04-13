@@ -87,7 +87,7 @@ function Homepage() {
                   </div>
                   <button
                     className="remove-button"
-                    onClick={() => removeItem(item.item_id)}
+                    onClick={() => removeItem(item.cart_item_id)}
                   >
                     Remove
                   </button>
