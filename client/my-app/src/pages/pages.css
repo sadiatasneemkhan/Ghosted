@@ -295,7 +295,7 @@
 
     .split-screen {
         display: flex;
-        height: 900px;
+        height: 950px;
         flex: 1; /* Make the right side take up half of the available space */
         background: linear-gradient(to right, #3BA6EA, #3BA6EA 50%, white 50%, white); /* Adjust colors as needed */
       }
