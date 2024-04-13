@@ -94,6 +94,10 @@
     }
 }
 
+.signup_desc{
+    display: none;
+}
+
 .page2_signup h1 {
     height: 41px;
     top: 98px;
@@ -284,9 +288,53 @@
     #pass1 {
         margin-right: 30px;
     }
+  }
 
-    
+  /* CSS for desktop view Sign Up */
+@media (min-width: 768px) {
 
+    .split-screen {
+        display: flex;
+        height: 900px;
+        flex: 1; /* Make the right side take up half of the available space */
+        background: linear-gradient(to right, #3BA6EA, #3BA6EA 50%, white 50%, white); /* Adjust colors as needed */
+      }
+
+      .signup_desc{
+        display: block;
+        width: 562px;
+        padding: 30px;
+
+        color: white;
+        font-size: 20px;
+        font-style: normal;
+    }
+
+    .signup_desc h2{
+        font-weight: 400;
+    }  
+
+    .dkpage3 {
+        width: 682px;
+        display: block;
+        position: absolute; 
+        top: 0; 
+        bottom: 0; 
+        left: 0; 
+        right: 0; 
+        margin-left: auto;
+    }
+
+    .page2_signup {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .businessname input {
+        display: flex;
+    }
   }
   
 
