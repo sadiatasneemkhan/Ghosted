@@ -130,23 +130,24 @@ function BusinessHomePage() {
       </div>
 
       <div className="scrollable-containerr2">
-        <div className="food-items">
-          {menuItems.map((item) => (
+      <div className="food-items">
+        {menuItems.map((item) => (
             <div
-              key={item.menu_item_id}
-              onClick={() => editNavigate(item.menu_item_id)}
-              style={{ cursor: "pointer" }}
+            key={item.menu_item_id}
+            onClick={() => editNavigate(item.menu_item_id)}
+            style={{ cursor: "pointer", position: "relative" }}
             >
-              <img
+            <img
                 src={getImage(item.image)}
                 alt={item.name}
                 className="food-items1"
                 draggable="false"
-              />
-              <p>{item.name}</p>
+            />
+                <p>{item.name}</p>
             </div>
-          ))}
+        ))}
         </div>
+
       </div>
       <div className="btn-ctn">
         <button className="add-to-cart2" onClick={addItemNavigate}>
