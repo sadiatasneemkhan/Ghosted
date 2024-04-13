@@ -47,7 +47,16 @@ function SignupPersonal() {
   };
 
   return (
-    <div className="page2">
+    <div className='split-screen'>
+      <div className='signup_desc'>
+        <h1 id='signup_heading'>
+          Local finds, simplified with GHOSTED
+        </h1>
+        <h2 id='signup_subheading'>
+        Sign up now to find and small businesses around you!
+        </h2>
+      </div>
+    <div className="page2 dkpage3">
       <header className="page2_signup">
         <h1>Choose Account Type</h1>
         <div className="page2_buttons">
@@ -140,6 +149,7 @@ function SignupPersonal() {
           <a href="./guestHomepage">Continue as guest</a>
         </p>
       </header>
+    </div>
     </div>
   );
 }
