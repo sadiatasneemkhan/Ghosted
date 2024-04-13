@@ -62,6 +62,10 @@ function UserSearch() {
   };
 
   const addToCart = () => {
+    if (count === 0) {
+      console.log("no items");
+      return;
+    }
     if (menuItem) {
       axios
         .post(`http://localhost:8080/cart_items/`, {
