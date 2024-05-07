@@ -19,6 +19,10 @@ Our app offers a comprehensive set of features tailored to the needs of local gh
 
 By offering these features, Ghosted aims to revolutionize the way customers interact with local ghost food businesses, providing a convenient and efficient platform for discovering, ordering, and communicating with these establishments.
 
+### Video Demonstration
+
+Watch our showcase video for [GHOSTED!](https://youtu.be/12iIP7XbeHw)
+
 
 
 
